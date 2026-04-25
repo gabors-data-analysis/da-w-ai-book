@@ -1,0 +1,18 @@
+# Quarto build output and cache
+/_book/
+/.quarto/
+/_freeze/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+.idea/
+.vscode/
+
+# Python (in case any chapter generates artefacts)
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

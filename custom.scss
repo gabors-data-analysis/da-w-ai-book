@@ -1,0 +1,71 @@
+/*-- scss:defaults --*/
+
+// Viridis color palette
+$viridis-dark: #440154;
+$viridis-purple: #481567;
+$viridis-blue: #3b528b;
+$viridis-teal: #21918c;
+$viridis-green: #5dc863;
+$viridis-yellow: #fde725;
+
+// Bootstrap overrides
+$primary: $viridis-blue;
+$secondary: $viridis-teal;
+$link-color: $viridis-blue;
+
+/*-- scss:rules --*/
+
+.hero-section {
+  background: linear-gradient(135deg, $viridis-dark 0%, $viridis-blue 100%);
+  color: white;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.week-card {
+  border: none;
+  border-left: 4px solid $viridis-teal;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.week-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.slideshow-link {
+  background: $viridis-purple;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
+.slideshow-link:hover {
+  background: darken($viridis-purple, 10%);
+  color: white;
+  text-decoration: none;
+}
+
+.assignment-badge {
+  background: $viridis-green;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
