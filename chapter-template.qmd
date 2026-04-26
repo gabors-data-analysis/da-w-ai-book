@@ -1,0 +1,142 @@
+---
+title: "Chapter template"
+---
+
+# Chapter template {.unnumbered}
+
+This page is the **specification** for what every chapter in the book looks like. It is not part of the book's reading order; it is a working document for the author and for the writing skill. If you are a reader who landed here, head back to the [preface](index.qmd).
+
+## One template, two flavours
+
+Every chapter follows the same skeleton, regardless of length. Inside that skeleton, two flavours are allowed:
+
+- **Learn-flavour chapters** explain a concept, a workflow, a kind of failure, or a tool. They are heavier on prose. The "Try this" section is a small exercise.
+- **Practice-flavour chapters** walk through doing a task end-to-end. They are heavier on code, prompts, and decisions. The "Try this" section is a structured variant the reader does themselves.
+
+We do not split the table of contents by flavour. The skeleton is the same; the weights move.
+
+## Voice and tone (apply to every chapter)
+
+- **Precise but plain.** Define a term the first time it shows up. Avoid jargon when a non-technical word does the job.
+- **Short sentences.** Default to short. Use a longer one for a contrast or for a careful caveat. Then go back to short.
+- **No bluffing.** If the book is not sure of something — a number, a behaviour, a policy — say so. Trust is the durable asset; one confident error costs ten correct chapters.
+- **Engaging, not breathless.** "AI lets you do things you couldn't" is a real selling point. We are honest about it. We do not oversell.
+- **Concrete examples.** Pull from health and food, sports (especially football), global politics, finance, international business. Pick examples that need no special background.
+- **The human keeps the decisions.** Every chapter where this matters reminds the reader, briefly, where the line is in *this* topic.
+- **Check, debug, taste.** Every chapter where this matters teaches one specific check the reader should run on AI's output for *this* topic.
+
+## Length budget
+
+- **Short chapter:** 1–2 pages. One idea, one example, one check, one exercise.
+- **Standard chapter:** 2–4 pages. One idea or workflow, two or three examples, a callout on AI failures, an exercise.
+- **Long chapter:** 4–5 pages. A workflow with multiple stages, code, prompts, decisions. Used sparingly.
+
+If a chapter wants to be longer than 5 pages, split it into two.
+
+## The skeleton
+
+Each chapter is structured like this. Sections marked **(required)** appear in every chapter. Sections marked **(optional)** appear when they earn their keep.
+
+### 1. Frontmatter (required)
+
+```yaml
+---
+title: "Short, descriptive chapter title"
+---
+```
+
+### 2. Opening hook (required)
+
+One short paragraph — two or three sentences. Why this chapter matters. The stakes for the reader. Avoid throat-clearing ("In this chapter, we will…"). Go straight at the reader.
+
+> *Example: "You will spend more of your career joining tables than running fancy regressions. AI will help with both — but the join is where it quietly lies to you."*
+
+### 3. What you will get from this chapter (required)
+
+A bullet list of three to five concrete outcomes. Outcomes the reader can check, not learning objectives in the formal sense.
+
+> *Example:*
+> - *Know which join type to pick when.*
+> - *Spot the most common AI mistake on joins (silent row drops).*
+> - *Run a join on a real two-table example and verify the row counts.*
+
+### 4. Body sections (required)
+
+The chapter's content. Use ## sub-headings freely. Keep each subsection focused. Concrete examples first, generalisations second. Code (Python only) when it earns the page.
+
+A small running example, drawn from the example domains above, is worth more than three abstract paragraphs.
+
+### 5. Where AI helps · Where AI bluffs (required, except in pure-tooling chapters)
+
+A short, two-bullet-list callout near the end of the chapter. Specific to *this* topic. Not generic.
+
+> *Helps:* writes the correct join syntax in three lines; suggests which key to use; spots a common type mismatch.
+> *Bluffs:* assumes a one-to-one join when the data is one-to-many; does not flag silently dropped rows; uses an outer join because the prompt was vague.
+
+### 6. Keep this with you, not the AI (required, except in pure-tooling chapters)
+
+A short list of decisions in this chapter's topic that should stay with the human. Two to four items.
+
+> *Example:*
+> - *Which key uniquely identifies a row in your main table.*
+> - *What to do with rows that don't match (drop, keep with NA, error out).*
+> - *Whether the join changed your unit of observation.*
+
+### 7. Try this (required for standard and long chapters; optional for short)
+
+A small hands-on activity. Five to twenty minutes. Concrete enough to do without further instructions. Ends with a self-check ("you should see N rows", "the coefficient should be roughly X").
+
+### 8. AI and me (required)
+
+The chapter-level reflection. Always the same three questions. Boilerplate is fine.
+
+> 1. How did AI **support** me in doing what I planned?
+> 2. How did AI **fail** me?
+> 3. How did AI **extend** me?
+
+### 9. Read more (optional)
+
+Up to three links. Prefer the Békés–Kézdi textbook for econometric methods we don't re-derive. External links only if they are essential and stable.
+
+### 10. Where to go next (optional)
+
+One or two lines pointing to the next chapter or to a Lab if relevant. Helpful for chapters that bridge two topics.
+
+## Things to avoid
+
+- Long abstract introductions before any example.
+- Unsourced numbers ("studies show that 73 percent…"). Either source them or do not use them.
+- Lists of every AI tool. Pick one or two; trust the reader to extend.
+- Screenshots of UIs. They date in months. Describe the action in words; readers can find the button.
+- Decorative images. Diagrams when they explain something the prose can't; otherwise none.
+- Causal language about correlations. Say "associated with" if you mean associated with.
+
+## Things to do
+
+- Show the reader the actual code or prompt, not a sanitised version.
+- Quote real AI outputs (good and bad) when they make a point.
+- Tell the reader when something might break in the next model release.
+- Tell the reader when you would not actually do this in a real project, and why.
+- End with a check the reader can run in under a minute.
+
+## Authoring loop
+
+When writing a chapter:
+
+1. Pick the flavour (Learn or Practice) and the length budget (short, standard, long).
+2. Draft the **opening hook** and **outcomes** first; they discipline the rest.
+3. Write the body. Cut ruthlessly. If a sentence does not earn its place, it goes.
+4. Add the **Helps · Bluffs** and **Keep this with you** sections last; they are the hardest to bluff and the most important to land.
+5. Read the chapter out loud once. If a sentence is hard to read aloud, rewrite it.
+6. Check that every claim is one of: derivable from cited material, demonstrated in the chapter, or labelled as opinion.
+
+## A note for the writing skill
+
+When this template is encoded as a Claude Code skill, the skill should:
+
+- Take a chapter title, intent, length budget, and any source material as input.
+- Produce a chapter that follows this skeleton.
+- Default to the **shorter** length budget if unsure.
+- Refuse to invent numbers, citations, or quotations. If a fact is needed and not provided, write `[FACT TO VERIFY: ...]` inline rather than fabricate.
+- Pull example domains from the list above; vary them across chapters.
+- Treat the *Helps · Bluffs* and *Keep this with you* sections as required outputs and prompt the author for input if it does not have enough material.
