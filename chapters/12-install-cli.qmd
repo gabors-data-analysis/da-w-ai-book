@@ -1,288 +1,119 @@
 ---
-title: "Installing AI CLI Tools"
+title: "Installing a CLI agent"
 ---
 
-# Installing AI CLI Tools
+# Installing a CLI agent
 
-Get Claude Code — and a couple of alternatives — installed. Sanity-check the install before the next chapter, where we put it to work.
+A CLI agent is the third harness from [Chapter 0f](00f-three-harnesses.qmd) — a tool you start in a project folder, that reads, writes, and runs files in that folder, and that you talk to in plain English. This book uses **Claude Code** as the default. The principles transfer to any of the alternatives.
 
-## Choose Your Tool
+## What you will get from this chapter
 
-All these CLI tools let you work with AI directly in your terminal. Pick one to start - they all work similarly.
+- Claude Code installed and running in a project folder.
+- A first session where it can see your files.
+- A note on permissions — what to grant, what to refuse.
 
-::: {.callout-tip}
-## Recommendation
-**Claude Code** is what we use in this course. But the skills transfer to any of these tools.
-:::
+## Before you install
 
-| Tool | Provider | Model | Pricing |
-|------|----------|-------|---------|
-| **Claude Code** | Anthropic | Claude | Claude Pro/Max ($20+/mo) or Console |
-| **Gemini CLI** | Google | Gemini | Free tier + paid plans |
-| **Codex CLI** | OpenAI | GPT-4o | ChatGPT Plus/Pro ($20+/mo) |
+Two things should already be in place from earlier in Part 0:
 
+- A working **terminal** — see [Chapter 0g](11-terminal-basics.qmd).
+- An **AI account** with API or paid-plan access — see [Chapter 0e](00e-ai-account.qmd). For Claude Code, you need a Claude Pro / Max subscription, or a Claude Console account with credits. The free tier of Claude.ai does not give you the CLI.
 
----
+If both are in place, the install is a one-liner.
 
-## Prerequisites (All Tools)
+## Install Claude Code
 
-Before installing any CLI tool, you need:
+The current install commands are at [docs.anthropic.com/claude-code](https://docs.anthropic.com/en/docs/claude-code/quickstart). They look like this on the day this chapter was written:
 
-### 1. Node.js
-
-Most CLI tools require Node.js. Check if you have it:
-
-::: {.panel-tabset}
-
-### Windows
 ```
-node --version
-```
-If not installed: Download from [nodejs.org](https://nodejs.org/) (LTS version)
+# macOS / Linux
+curl -fsSL https://claude.ai/install.sh | bash
 
-### Mac
-```
-node --version
-```
-If not installed:
-```
-brew install node
-```
-Or download from [nodejs.org](https://nodejs.org/)
-
-### Linux
-```
-node --version
-```
-If not installed:
-```
-# Ubuntu/Debian
-sudo apt update && sudo apt install nodejs npm
-
-# Fedora
-sudo dnf install nodejs npm
-```
-
-:::
-
-### 2. A Terminal
-
-::: {.panel-tabset}
-
-### Windows
-- **Windows Terminal** (recommended) - comes with Windows 11, or install from Microsoft Store
-- **PowerShell** - built-in, search "PowerShell"
-- **Command Prompt** - built-in, search "cmd"
-
-### Mac
-- **Terminal** - built-in, press `Cmd+Space`, type "Terminal"
-- **iTerm2** - popular alternative
-
-### Linux
-- Usually `Ctrl+Alt+T` or search "Terminal"
-
-:::
-
-::: {.callout-note}
-## VS Code Users
-You can also open a terminal directly inside VS Code! Press `` Ctrl+` `` (backtick) on Windows/Linux or `` Cmd+` `` on Mac—or go to **View → Terminal**. This keeps everything in one window.
-:::
-
-**New to the terminal?** Read [Terminal Basics](terminal-basics.html) first.
-
----
-
-## Claude Code
-
-Anthropic's official CLI for Claude.
-
-### What is Claude Code?
-
-Claude Code is a command-line tool that lets you work with Claude directly in your terminal. It can read, edit, and create files, run commands, and help with coding and data analysis where your code lives.
-
-**Why use it?**
-
-- Works directly with your files and folders
-- Can read, edit, and create code for you
-- Runs commands and sees the output
-- Great for data analysis workflows
-- No copy-pasting between browser and code editor
-
-### Install
-
-::: {.panel-tabset}
-
-### Windows
-
-PowerShell:
-```
+# Windows (PowerShell)
 irm https://claude.ai/install.ps1 | iex
 ```
 
-Command Prompt:
-```
-curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
-```
-
-### Mac
+Verify it worked:
 
 ```
-curl -fsSL https://claude.ai/install.sh | bash
+claude --version
 ```
 
-Or with Homebrew:
-```
-brew install claude
-```
+You should see a version number. If you see *"command not found,"* close the terminal, open a new one, and try again — installers add `claude` to your PATH, but only new terminals see the change.
 
-### Linux
+## First session
+
+Navigate to a project folder — any folder with a few real files in it.
 
 ```
-curl -fsSL https://claude.ai/install.sh | bash
-```
-
-:::
-
-### Use
-
-Navigate to your project folder and start:
-```
-cd /path/to/your/project
+cd ~/Documents/dawai-scratch
 claude
 ```
 
-**First time**: You'll be prompted to log in via browser. You need one of:
-- **Claude Pro, Max, Teams, or Enterprise** subscription (recommended)
-- **Claude Console** account (API access with pre-paid credits)
+A welcome message appears. The first time, it sends you to a browser to log in. After that, you are in a chat — but a chat that can see every file in this folder.
 
-**After login**: Type your requests naturally like "what does this project do?" or "add a hello world function to the main file."
+Try a small request:
 
-**More details:** [Claude Code Documentation](https://code.claude.com/docs/en/quickstart)
+> *"List the files in this folder. Tell me, in two sentences, what each of them appears to be."*
 
-### Quick Tips
+Claude Code reads them and answers. *That is the harness:* the AI is no longer guessing what your files contain. It is looking.
 
-| Command | What it does |
-|---------|--------------|
-| `claude` | Start Claude Code |
-| `exit` | Quit Claude Code |
-| `claude --help` | See all options |
-| `/help` | Get help while inside Claude |
+## A note on alternatives
 
-### Requirements
+The other CLI agents work the same way; only the install command and the model behind them differ.
 
-- **Claude account** — Sign up at [claude.ai](https://claude.ai) if you don't have one
-- **Subscription or Console credits** — Claude Pro/Max/Teams/Enterprise or a Claude Console account with credits
-- **Internet connection** — Claude runs in the cloud
+- **Codex CLI** (OpenAI). Install via `npm install -g @openai/codex`. Requires a paid ChatGPT plan or an API key.
+- **Aider** (open-source, model-agnostic). `pip install aider-chat`. Works with Claude, ChatGPT, or local models.
+- **Cursor agent mode**. Inside the Cursor IDE rather than a CLI, but the workflow is the same.
 
-### Troubleshooting
+The chapters that use a CLI agent are written so the actions transfer. Where Claude Code does something specific that matters — `CLAUDE.md` files, skills, headless mode — the chapter says so and the same idea has equivalents in the alternatives.
 
-- **"command not found"** — Close and reopen your terminal, then try again
-- **"Permission denied"** — Re-run the install step with admin permissions or follow the OS-specific instructions above
-- **"Authentication failed"** — Make sure your Claude subscription/credits are active and try logging in again
+## Permissions: what to grant
 
----
+A CLI agent will ask you, the first time, whether to grant permissions to read files, edit files, run commands, and access the network. The defaults are reasonable. A few habits make them safer.
 
-## Gemini CLI
+- **Start permissive on a fresh folder.** If the folder has nothing precious in it, let the agent do what it needs to do. You will learn faster.
+- **Tighten on a real project.** When the folder contains analysis you care about, switch to a mode where the agent asks before it writes or runs. Most CLI agents have this as a flag or a setting.
+- **Always review what it changed.** `git status` and `git diff` after a session show you exactly what touched the project. This is non-negotiable.
+- **Never let it touch credentials.** If a folder contains an `.env` file with API keys, exclude it from the agent's access (most tools have a `.gitignore`-like mechanism).
 
-Google's CLI for Gemini models.
+## A first real task
 
-### Install
+Try this in the same scratch folder:
 
-::: {.panel-tabset}
+> *"Create a small Python script called `summary.py` that reads any CSV in this folder, prints its dimensions, and prints the first five rows. Test it on `<one-of-your-csvs>`."*
 
-### Windows
+The agent will:
 
-```
-npm install -g @google/gemini-cli
-```
+1. Write `summary.py`.
+2. Run it.
+3. Show you the output.
+4. Likely fix one small thing if it errored.
 
-### Mac
+Watch the whole loop. *That* is what the CLI harness gives you that the others do not.
 
-```
-npm install -g @google/gemini-cli
-```
+## Where AI helps · Where AI bluffs
 
-### Linux
+**Helps.** End-to-end tasks across multiple files. Diagnosing what your project does when you have not opened it in months. Refactoring with an actual run-test loop instead of guesses.
 
-```
-npm install -g @google/gemini-cli
-```
+**Bluffs.** Confidently running a command that does the wrong thing. Producing a long, plausible explanation of what it just did when, in fact, it failed silently. Generating files that look correct and that, on inspection, are missing the substance you asked for. The fix is the same in every case: *check the diff, run the script yourself, look at the output*.
 
-:::
+## Keep this with you, not the AI
 
-### Use
+- *Permissions.* Grant deliberately, especially on real projects.
+- *Scope of a session.* "Do this one thing" is safer than "do all of this." A one-off agent that finishes quickly is easier to audit.
+- *The decision to keep the changes.* `git restore .` is your friend if the session went badly. Use it without guilt.
 
-Navigate to your project folder and start:
-```
-cd /path/to/your/project
-gemini
-```
+## Try this
 
-**First time**: You'll be prompted to select **Login with Google** and authenticate via browser with your Google account.
+In a fresh folder, run `git init`, drop in any small CSV, start Claude Code, and ask: *"Print the row count and column names of every CSV in this folder."* Watch what it does. Run `git status` after — there should be nothing modified, because you only asked it to read. Total time: under five minutes.
 
-**Account options**:
+## AI and me
 
-- Individual Google accounts (free tier + paid Google AI Pro/Ultra)
-- Organization accounts (company, school, or Google Workspace)
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
 
-**More details:** [Gemini CLI Documentation](https://geminicli.com/docs/get-started/installation/)
+## Where to go next
 
----
-
-## Codex CLI
-
-OpenAI's command-line coding tool.
-
-### Install
-
-::: {.panel-tabset}
-
-### Windows
-
-```
-npm install -g @openai/codex
-```
-
-### Mac
-
-```
-npm install -g @openai/codex
-```
-
-Or with Homebrew:
-```
-brew install openai/tap/codex
-```
-
-### Linux
-
-```
-npm install -g @openai/codex
-```
-
-:::
-
-### Use
-
-Navigate to your project folder and start:
-```
-cd /path/to/your/project
-codex
-```
-
-**First time**: You'll be prompted to sign in via browser. You can authenticate with:
-
-- **ChatGPT account** (Plus, Pro, Business, Edu, or Enterprise) - recommended
-- **OpenAI API key** (alternative option)
-
-**More details:** [Codex CLI Documentation](https://developers.openai.com/codex/cli/)
-
----
-
-## Next Steps
-
-1. **Install one tool** (we recommend Claude Code for this course)
-2. **Read** [Terminal Basics](terminal-basics.html) if you're new to command line
-3. **Try it** on a simple task: navigate to a folder with some files and ask "what's here?"
-4. **Continue** to [Week 04](../week04/) to use it for data analysis
-
+You are done with Part 0. [Chapter 1 — AI for coding work](01-ai-for-coding.qmd) is the start of Part I. We get out of setup and into the substance.

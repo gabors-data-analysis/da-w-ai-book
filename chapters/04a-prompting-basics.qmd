@@ -4,27 +4,93 @@ title: "Prompting basics"
 
 # Prompting basics
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+A short, opinionated chapter. Most "prompting guides" online are recipes. This one is principles. Six of them, then a worked example, then a single pitfall worth flagging.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-A short, opinionated chapter on talking to a chat AI. Most "prompting guides" you find online are recipes. This one is principles.
+- Six principles you can apply to any prompt.
+- A before-and-after that shows what they buy you.
+- A clear sense of the difference between *prompting* and *context engineering*.
 
-- Be specific about the task, the constraint, and the audience.
-- Tell the model what *not* to do as well as what to do.
-- Give it the data — actually give it. A pasted CSV preview beats three paragraphs of description.
-- Iterate; don't redraft. AI is good at fixing one thing at a time.
-- When in doubt, ask the model what it would need to do better. The answers are useful.
+## Six principles
 
-## Where this chapter fits
+**1. State the task, the constraint, and the audience.**
 
-Right after the LLM glossary and before the chapters where we start working in chat seriously (Part II).
+Most weak prompts skip the constraint and the audience. *"Write a summary of this paper"* leaves the model guessing length, tone, and reader. *"Write a 150-word summary of this paper for an undergraduate finance class, focused on the empirical strategy"* lets it deliver.
 
-## TODO for the author
+**2. Tell the model what *not* to do.**
 
-- A worked before/after example: vague prompt, output, sharper prompt, better output.
-- One "anti-pattern" sidebar: roleplay prompts ("act as a senior data scientist…") — when they help and when they hurt.
-- A short note on the difference between *prompting* and *context engineering*. The book mostly cares about the second one.
+Almost as useful as telling it what to do. *"Do not include caveats about model limitations. Do not produce a numbered list."* Negative instructions trim the most common failure modes.
+
+**3. Give the model the data, not a description of the data.**
+
+If you can paste it, paste it. A 30-line CSV preview beats three paragraphs about the file. A paragraph from the codebook beats a paraphrase of the codebook. Models work much better with the actual thing.
+
+**4. Iterate, do not redraft.**
+
+When the first answer is not quite right, *change one thing* and ask again. *"Make the title shorter."* *"Drop the second exhibit."* *"Use median instead of mean."* This is faster and more useful than rewriting the whole prompt.
+
+**5. Ask the model what it would need to do better.**
+
+If you are stuck, *"What information would you need from me to do this well?"* is one of the most useful questions. The answer is often a list of three things you forgot to give it.
+
+**6. Stop when good enough.**
+
+The marginal return on a sixth iteration is almost always negative. Ship.
+
+## A before-and-after
+
+You want a small Python function to flag suspicious-looking transactions in a payments dataset.
+
+**Weak prompt:**
+
+> *"Write a function to detect fraudulent transactions."*
+
+You will get a generic textbook function, with a hard-coded threshold and no awareness of your data.
+
+**Strong prompt:**
+
+> *"Write a Python function `flag_suspicious(df)` that returns a boolean Series flagging rows that should be reviewed. The DataFrame `df` has columns `amount` (float, EUR), `country` (ISO-2 string), `merchant_category` (string), `timestamp` (datetime). A row is suspicious if any of: (a) the amount is in the top 1% of the amounts seen for that merchant_category, (b) the country differs from the modal country for that merchant_category, (c) two or more transactions for the same `(merchant_category, country)` pair occur within 60 seconds. Use pandas. Do not invent additional columns. Add a one-line docstring. Do not include caveats about real-world fraud detection."*
+
+The second prompt fits in your head. It also fits in three sentences. Time to write it: one minute. Time it saves over the weak version: easily fifteen.
+
+## Prompting vs. context engineering
+
+Two terms get used loosely; they mean different things.
+
+- **Prompting** is what you type in the chat. The principles above.
+- **Context engineering** is the larger problem of getting the right material into the model's view in the first place — the system instructions, the documents you upload, the past turns you keep, the tools you let it call. Most of the AI quality you experience comes from context engineering, not from the wording of the final prompt.
+
+The book mostly cares about the second one. The chapter on agentic AI (Part III) is, in large part, a chapter on context engineering. This chapter is the prerequisite.
+
+## A pitfall worth flagging
+
+**Roleplay prompts** like *"You are a senior data scientist with 20 years of experience…"* are everywhere on the internet. They occasionally help. They more often *hurt*: the model adopts a verbose, hedge-everything tone that is the opposite of what you want from a teammate. Use roleplay sparingly; prefer concrete instructions about the *output* you want.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Improving your prompt when you ask it to. Try *"Critique this prompt and rewrite it to be more specific."* The rewrites are often genuinely better.
+
+**Bluffs.** Telling you that a "magic phrase" makes the model perform better. The internet is full of these. Most do nothing. Some are placebo.
+
+## Keep this with you, not the AI
+
+- The task you are actually trying to do. The AI does not own it.
+- The decision to stop iterating. AI will keep going as long as you do.
+- The decision of how much context is too much. Pasting an entire book into a prompt makes the model worse, not better.
+
+## Try this
+
+Open your chat AI. Paste a weak prompt of your own — something vague you have asked a model in the past. Now apply the six principles. Rewrite it. Run both. Compare the answers.
+
+If the rewrite is better, that is your day's gain. If it is not, your weak prompt was already good enough. Either result teaches you something.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+[Where AI fails — a field guide](04b-where-ai-fails.qmd) closes Part I.

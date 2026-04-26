@@ -4,28 +4,103 @@ title: "Working honestly with AI"
 
 # Working honestly with AI
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+A practical chapter on academic integrity, attribution, and disclosure. Not a lecture; a working guide. By the end you should know what to write in your method section, how to cite an AI tool, and how to keep the line between *"AI helped"* and *"AI wrote it"* clear in your own work and in a group project.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-A practical chapter on academic integrity, attribution, and disclosure. Not a lecture; a working guide.
+- A simple working rule for AI use in academic submissions.
+- A model paragraph for your method section.
+- A note on how this differs in industry, briefly.
 
-- The course rule, recapped: use AI as your assistant, not your ghostwriter. You must be able to defend every line.
-- What goes in a method section when AI helped: which model, which prompts (in spirit, not verbatim), what AI did, what you did, what you checked.
-- What goes in a citation when AI is a real input — the current consensus is forming; we summarise the cleanest versions (APA, Chicago, journal-specific notes).
-- The difference between *AI helped me write the paragraph* and *AI wrote the paragraph and I pasted it*. Both happen; only one is acceptable in academic work.
-- Group projects: how to keep the line clear when one teammate over-delegates.
-- A short, honest section on what your instructors are likely to detect and how.
+## The simple rule
 
-## Why this chapter is here, near the end
+The course this book is built on has one rule:
 
-You need to have used AI seriously before the integrity questions become real. By Part IX you have done seven parts of work; the rules now have something to stick to.
+> *Use AI freely. Do not submit something created by AI. AI is your assistant, not your ghostwriter. You must be able to defend every line.*
 
-## TODO for the author
+In practice this means three things.
 
-- A model paragraph: "AI use" disclosure for a project methods section.
-- One para on the difference between *transparency about tooling* (good, expected) and *attribution of authorship* (different question, narrower).
-- A note on AI-generated images, AI-generated code comments, and other places where attribution slips through the cracks.
+**1. You can use AI for code, drafts, and explanations.** Liberally. The book assumes you do.
+
+**2. You cannot submit text or analysis you do not understand.** If your instructor asks you to walk through your regression and you cannot, you have over-delegated. The pedagogical point of any submission is that *you* learned the thing.
+
+**3. You must disclose, in your method section, that you used AI and how.** Briefly, factually, without grovelling.
+
+That is the whole rule. The rest of the chapter is what it looks like in practice.
+
+## What goes in a method section
+
+A short paragraph — three to five sentences. Mention which AI tool you used, for what, and what you checked. Do not list every prompt. Do not pretend AI did less than it did.
+
+A model paragraph (you can adapt this):
+
+> *Analysis was performed in Python. I used Claude Opus 4.7 (chat) to draft initial pandas code and to review my regression specification, and GitHub Copilot in VS Code to autocomplete routine code as I wrote. AI-generated code was run, inspected for column-name and type errors, and verified against printed row counts and intermediate summaries. The research question, the choice of controls, and the interpretation of all results are my own.*
+
+Three sentences. Specific. Honest. Names the tools. Says what was checked. Says what stayed with the human. If your instructor asks for more detail, expand any of the three.
+
+## What about citing AI?
+
+The conventions are still forming. Two reasonable approaches:
+
+- **Treat AI as a tool, not an author.** Mention it in the method section. Do not list it in the bibliography. This matches how you would treat Stata, R, or SPSS.
+- **If a particular AI output is doing real argumentative work** — say, a literature summary you used as your starting point — note that explicitly. *"An initial list of candidate instruments was produced by Claude Opus 4.7 (April 2026); each was then reviewed against [primary source] and refined."*
+
+When in doubt, follow your university's or journal's policy. APA, Chicago, and a handful of journals now have specific guidance; check it once and apply it.
+
+## A subtle line: drafted vs. generated
+
+There is a real difference between *"AI helped me draft this paragraph; I edited it heavily; I would defend every sentence"* and *"I asked AI to write a paragraph; I pasted it in"*. Both happen. Only the first is acceptable in academic work.
+
+A useful self-check: read each paragraph of your submission aloud. Could you have written this? Would you have written this? If the answer is *no — this is wordier than I write, or this hedges things I would not hedge*, rewrite it. The output should sound like you.
+
+## Group projects
+
+The hardest case. One teammate over-delegates and the rest of you are left holding the bag.
+
+Two habits help.
+
+- **Talk about it early.** Agree as a team what you will and will not let AI do. Write it down — one line is enough — and pin it to your repo's README.
+- **Read each other's commits.** Not to police; to learn. If a teammate's commit produces text or code they cannot explain in the next group meeting, raise it then. Better than the day the report is due.
+
+The capstone project in Part VII assumes you have these conversations. The grading does too.
+
+## What about industry?
+
+Briefly: most workplaces in 2026 have an AI policy. Read it. The principles are similar to the academic ones — disclose, do not submit work you do not understand, do not paste sensitive data into free tiers — but the *enforcement mechanism* is your reputation rather than a misconduct hearing.
+
+The book's habits travel. A junior analyst who can articulate, *"AI drafted this code; here is what I checked; here is the decision I made"* is a much better hire than one who either pretends AI did nothing or pretends AI did everything.
+
+## A note on AI-generated images and code comments
+
+Two places where attribution slips through the cracks.
+
+- **Images.** If a chart or diagram in your submission was generated by an image model, say so. Do not pass it off as your work. (Most analytical chapters of this book do not use generated images at all.)
+- **Code comments.** AI is happy to write reams of "this function does X" comments. Most of them are obvious from the code. If a comment is doing real explanatory work — *"we exclude these rows because of the survey timing oddity in 2018"* — write it yourself. Comments are *for the next reader*, and AI does not know who that is.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Drafting your method-section disclosure. Suggesting how to phrase what you checked.
+
+**Bluffs.** Telling you what your university's policy is. Read the policy yourself; do not let an AI interpret it.
+
+## Keep this with you, not the AI
+
+- The decision of *what* to disclose. This is yours, and it is your reputation.
+- The line between *drafted* and *generated*. Drawn by you, every time.
+- Every causal claim, every limitation, every conclusion. The substance is yours.
+
+## Try this
+
+Pick one assignment you have submitted in the last term. Write — for yourself, not for hand-in — a three-sentence "AI use" paragraph for it, in the model above. Notice what it forces you to be honest about. Notice if it would have changed the work itself.
+
+This is also one of the most useful habits you can build *before* the capstone.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+[Cost and budget](89a-cost-and-budget.qmd) — the other half of working honestly: with your wallet.

@@ -48,33 +48,55 @@ Voice: precise but plain, short sentences, no bluffing, engaging without being b
 | Part | Focus |
 |---|---|
 | Front matter | Preface, How to use this book, Edition + model snapshot |
-| **Part 0** | Set up your tools — git, GitHub, Python, AI account |
+| **Part 0** | Tools and harnesses — git, GitHub, Python, AI account, *plus* a "three harnesses" overview, terminal, VS Code+Copilot, and CLI agent |
 | **Part I** | What an LLM is, and what it isn't |
-| **Part II** | Working with AI in chat — documenting, joining, reporting, graphing |
-| **Part III** | From chat to CLI — terminal, agentic AI, end-to-end pipelines |
-| **Part IV** | Text as data — NLP basics, reading text, sentiment with LLMs |
+| **Part II** | Working with AI: data foundations — documenting, joining, reporting, graphing |
+| **Part III** | Working at scale: agents and pipelines |
+| **Part IV** | Text as data |
 | **Part V** | AI in empirical research — controls, instrumental variables |
-| **Part VI** | APIs and automation — keys, LLM APIs in Python, walkthroughs |
+| **Part VI** | APIs and automation |
 | **Part VII** | Capstone — Manager Impact in Football |
 | **Part VIII** | Labs — work on your own |
 | **Part IX** | Working honestly — academic integrity, cost and budget |
 | Reference | Case studies, Where to go from here, this Linear Plan |
 | Appendix | Rights, acknowledgements, thanks |
 
-The current draft is a re-flow of the course material into this shape. Many chapters are inlined source content that needs to be rewritten to the chapter shape. Placeholders sit in slots where the book argues a chapter is needed but the source course did not provide one.
+**Harness-agnostic by design.** Earlier drafts pushed the CLI to Part III. The current structure introduces all three harnesses — chat, IDE+Copilot, CLI agent — in Part 0, so the reader can pick whichever one they want and use it across the whole book. Chapters from Part II onwards are written so the workflow runs in any of the three; where the harness materially changes the answer, the chapter says so.
+
+The current draft is a mix of newly written chapters (drafted to the chapter template) and inlined source content from the live course (slated for rewrite). Placeholders sit in slots where the book argues a chapter is needed but the source course did not provide one.
 
 ## Migration status
 
-The book was first scaffolded with `{{< include >}}` shortcodes pointing at the course's source files. After the move to this standalone repository, those includes were inlined: every chapter file is now self-contained. From here, each chapter goes through one rewrite pass to match the chapter template.
+The book was first scaffolded with `{{< include >}}` shortcodes pointing at the course's source files. After the move to this standalone repository, those includes were inlined: every chapter file is now self-contained.
 
-Open follow-up tasks, in rough priority order:
+**Drafted to the chapter template** (Spring 2026 edition, first wave):
 
-1. **Per-chapter rewrite via the writing skill.** Apply [chapter-template.qmd](chapter-template.qmd) to every inlined chapter. Strip web-only artefacts (hero blocks, week-card divs, image references). Add the *Helps · Bluffs* and *Keep this with you* sections.
+- Part 0: `00a-prep`, `00b-git`, `00c-github`, `00d-python`, `00e-ai-account`, `00f-three-harnesses`, `11-terminal-basics`, `13-vscode-copilot`, `12-install-cli`.
+- Part I: `01-ai-for-coding`, `02-llm-review`, `03-which-ai`, `04a-prompting-basics`, `04b-where-ai-fails`.
+- Part II: `05-documenting`, `07-joining-tables`.
+- Part IX: `89-academic-integrity`, `89a-cost-and-budget`.
+
+That is 18 chapters of real prose, totalling roughly 25,000 words and 35–50 book pages.
+
+**Awaiting rewrite** (currently inlined course content; structure stands but voice needs the chapter-template pass):
+
+- Part I: `04-glossary` (already a useful reference; light touch only).
+- Part II: `06-doc-fundamentals`, `08-reports`, `09-ideas-good-report`, `10-creating-graphs`.
+- Part III: `14-agentic-cli`, `15-advanced-cli`, `16-data-to-report`, `17-designing-projects`, `18-reproducible`.
+- Part IV: `19-nlp-basics`, `20-text-analysis`, `21-sentiment`, `22-pdf-guide`.
+- Part V: `23-ai-research-controls`, `24-ai-research-iv`.
+- Part VI: `25-api-keys`, `26-api-intro`, `27-llm-apis-python`, `28-api-advanced`, `29-walkthrough-wb-fred`, `30-walkthrough-fbref`.
+- Part VII: `31-capstone-brief`, `32-capstone-data`, `33-capstone-text`, `34-capstone-did`.
+- Reference: `90-case-studies`, `91-beyond`.
+- Appendix: `A1-rights-thanks`.
+
+**Open follow-up tasks**, in rough priority order:
+
+1. **Per-chapter rewrite for the inlined content.** Apply [chapter-template.qmd](chapter-template.qmd) to each. Strip web-only artefacts (hero blocks, week-card divs, image references). Add the *Helps · Bluffs* and *Keep this with you* sections.
 2. **Internal-link audit.** Inlined content still references course-website paths (`/da-knowledge/...`, `../week08/index.qmd`). Rewrite to chapter anchors inside the book.
-3. **Strip remaining R snippets.** The book is Python-only; some inlined sources still show R alongside Python.
+3. **Strip remaining R snippets.** Python only.
 4. **Drop the `images/` folder** when the per-chapter rewrites no longer reference it.
-5. **Fill the placeholders** in Parts 0, I, and IX with full chapters.
-6. **Image-free check.** A final pass to confirm no `![](...)` references survive.
+5. **Image-free check.** A final pass to confirm no `![](...)` references survive.
 
 ## Editorial decisions (locked for Spring 2026)
 

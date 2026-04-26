@@ -4,30 +4,90 @@ title: "Where AI fails — a field guide"
 
 # Where AI fails — a field guide
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+The preface gave the headlines. This chapter is the field guide: a taxonomy of the specific failures you will meet, with a one-line diagnostic for each. By the end you should be able to read AI output sceptically without reading it cynically.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-The preface gave the headlines on where AI bluffs. This chapter is the field guide: a taxonomy of the specific failure modes you will meet, with a one-line diagnostic for each.
+- Six failure modes, named.
+- A cheap diagnostic for each one — what to look for, in under a minute.
+- A "diagnostic ladder" so you spend the right amount of effort checking.
 
-- **Hallucinated facts** — citations to papers that don't exist, statistics that look right and aren't, function names from libraries that don't have them.
-- **Confidently wrong code** — code that runs and gives a plausible answer to a different question than the one you asked.
-- **Silent data loss** — joins that drop rows, filters that keep too many, sample restrictions applied to one half of a script and not the other.
-- **Causal-sounding correlation** — a regression coefficient described as an "effect" when nothing in the design supports a causal reading.
-- **Stale knowledge** — APIs, library versions, regulations, sports results. Anything that moved after the model's training cut-off.
-- **Audience drift** — the report drifts toward a generic data-science blog tone instead of the specific reader you have.
+## Six failure modes
 
-For each, one diagnostic the reader can apply in under a minute.
+**1. Hallucinated facts.**
 
-## Where this chapter fits
+The model invents something plausible-sounding and confidently false. A paper that does not exist. A statistic that looks right and is not. A feature of a Python library that has the wrong name.
 
-Closes Part I. After this, the reader should be able to read AI output sceptically without reading it cynically.
+*Diagnostic:* if a fact is doing real work in your argument, look it up in a primary source. Wikipedia is fine for the kind of fact Wikipedia covers; the OECD or World Bank for macro stats; the actual library docs for code. Sixty seconds; saves your reputation.
 
-## TODO for the author
+**2. Confidently wrong code.**
 
-- One real example per failure mode. Real outputs, names anonymised where needed.
-- A "diagnostic ladder": cheapest check first, more expensive checks only if the cheap ones flag a problem.
-- A note that the failure modes evolve with the models. Date everything.
+Code that runs and gives a plausible answer to a *different* question than the one you asked.
+
+*Diagnostic:* spot-check intermediate results. Print the row count after a filter. Print `value_counts()` on the variable you grouped by. Read the first three rows of any output file. The bug is almost always visible at one of these points.
+
+**3. Silent data loss.**
+
+The pernicious cousin of (2). Joins that drop rows. Sample restrictions that keep too many. Filters quietly applied to one half of a script and not the other.
+
+*Diagnostic:* row count before, row count after, every time. If the number changed, you should be able to say why in one sentence.
+
+**4. Causal-sounding correlation.**
+
+A regression coefficient described as "the effect of X on Y" when nothing in the design supports a causal reading.
+
+*Diagnostic:* read the AI's prose; replace "effect of X on Y" with "association between X and Y" wherever it appears. If the prose still makes the point you wanted to make, you are fine. If it weakens, you were leaning on a causal claim you have not earned.
+
+**5. Stale knowledge.**
+
+Anything that moved after the model's training cut-off. APIs, library versions, regulations, sports results, names of finance ministers, prices.
+
+*Diagnostic:* if the question is about something that could change, ask the model when its information was last updated for that topic. Do not trust the answer fully — but the right answer is usually *"I don't know if this is current."* If you get crisp specifics about something inherently moving, suspicion is warranted.
+
+**6. Audience drift.**
+
+The output drifts toward a generic "data-science blog" tone instead of the specific reader you have. Bullet points everywhere. Hedges in every paragraph. Three-line opening that says nothing.
+
+*Diagnostic:* read the first paragraph aloud. If it sounds like a generic introduction, it is. Cut it; rewrite it for your reader.
+
+## A diagnostic ladder
+
+Not every output deserves the same scrutiny. Use the cheapest check that fits the stakes.
+
+- **Cheap (always do):** read the output. Skim for the failure modes above.
+- **Medium (when it matters):** spot-check intermediate results. Look up one fact. Read one paragraph aloud.
+- **Expensive (when it really matters):** verify against a primary source. Re-run a regression on a subsample. Hand-classify ten cases the model just classified.
+
+The expensive check, on a sample of ten cases, takes fifteen minutes. It catches problems no one will catch later. The book's labs are designed so that you actually do this on something.
+
+## A note on tone
+
+A common temptation when you have read a chapter like this one is to start every interaction with an AI as if it is trying to mislead you. *Don't.* Adversarial mode burns more time than it saves. The right posture is *trust, but verify* — exactly the same posture you would have with a junior collaborator who is fast, talented, and occasionally over-confident. You are not auditing a hostile witness. You are working with a smart colleague who needs a careful editor.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Diagnosing its own output if you ask. *"Read your previous answer. Are there claims that are not supported by what I gave you?"* often surfaces real problems.
+
+**Bluffs.** Telling you it has "double-checked" something it cannot actually look up. The model does not have a fact-check button; if it claims to have used one, that is a token-prediction artifact, not a verification.
+
+## Keep this with you, not the AI
+
+- The decision of how hard to check. Stakes drive scrutiny.
+- The judgement of whether a claim is "doing real work" in your argument. Some claims are decoration. Some are load-bearing. Verify the load-bearing ones.
+- Causal language. Always.
+
+## Try this
+
+Take any AI-generated paragraph from earlier in the book — one you produced in a previous chapter's exercise, or one you generate now from a prompt. Read it slowly with this chapter open. Mark each sentence with one of: *fact* (could be wrong, can be checked), *opinion* (subjective, no check possible), *causal claim* (needs identification strategy). Count how many fall into each category.
+
+You will do this faster as you go. After fifty chapters, you do it without thinking. That is the taste the book is really after.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+End of Part I. Part II opens with [Documenting code and data with AI](05-documenting.qmd) — a chapter where the failure modes from this page show up immediately, in a context where they are easy to catch.

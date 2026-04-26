@@ -4,32 +4,68 @@ title: "What you need before you start"
 
 # What you need before you start
 
-::: {.callout-warning}
-## Placeholder chapter
-This is a stub. The full chapter will be drafted using the chapter-writing skill (see [chapter-template.qmd](../chapter-template.qmd)).
-:::
+This is the pre-flight check. Skim it; install what you don't have; come back when the ticks below are all green. The rest of Part 0 walks you through each item in turn, so do not panic if half of this list looks unfamiliar.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-A pre-flight check before you open the rest of the book.
+- A short list of accounts and software the book assumes you have.
+- A sense of which items are essential from page one and which can wait.
+- A pointer to the right Part 0 chapter for each item.
 
-- A computer you can install software on (Windows, macOS, or a Linux you control).
-- A working **Python** environment. We will assume Python 3.11 or newer.
-- A **terminal** you are willing to live in. PowerShell or Windows Terminal on Windows, Terminal or iTerm on macOS, any shell on Linux.
-- A **GitHub account**. Free is fine.
-- An account with **at least one frontier chat AI**. This edition is written against Claude Opus 4.7 and ChatGPT 5.5.
-- About **five US dollars** of credit on one AI provider's API console for the few chapters that use APIs directly. (Optional for most of the book; required for the capstone.)
+## The list
 
-## Where this chapter will lead
+You need six things. Three of them are accounts. Three of them are software.
 
-The next four chapters in Part 0 walk through each item in turn — Git, GitHub, Python, and the AI account. None of them is long. If you already have all of the above, skim them and move to Part I.
+**Accounts.**
 
-## Related Békés–Kézdi material
+- A **GitHub account.** Free is fine. We use it to store your work and, in the capstone, to publish a small website. Sign up at [github.com](https://github.com).
+- An **AI chat account** with at least one frontier provider. This edition was written against Claude (Pro tier) and ChatGPT (Plus tier). Either one will do for almost every chapter. The free tiers also work for a surprising amount of the book; you will hit limits in Parts III and VI.
+- A **Google or Microsoft account** if you want to try the free academic tiers some providers offer. Optional.
 
-If you are reading the textbook *Data Analysis for Business, Economics, and Policy* alongside, the Python setup overlaps with Chapter 1's coding appendix. We point at that appendix rather than repeating it.
+**Software.**
 
-## TODO for the author
+- **Python 3.11 or newer.** Anything that can `import pandas` and run a small script.
+- A **terminal.** macOS Terminal, Windows Terminal (or PowerShell), or any Linux shell.
+- A **code editor.** VS Code is the default in this book; RStudio works too. Pick one and stick with it.
 
-- One short paragraph per item: what it is, why we need it, how long it takes.
-- A "you are ready when…" checklist at the end.
-- A note for readers on managed laptops (university IT, restricted installs).
+## What you actually need on day one
+
+If you only do three things before reading on, do these:
+
+1. Make sure Python runs. Open a terminal and type `python --version`. You should see `Python 3.11.x` or later.
+2. Sign up for one AI chat account. Five minutes. You can do the entire first half of the book with just this.
+3. Sign up for GitHub. Two minutes. You will not use it for a few chapters; setting it up early is painless.
+
+The rest can wait until you need it. Terminal commands come up in the next chapter. VS Code waits until you start writing real scripts. The CLI agent waits until Part III. API keys wait until Part VI.
+
+## A note for readers on locked-down laptops
+
+If your computer is managed by your university's IT and you cannot install software freely, you have two options. First, ask. Many universities will whitelist Python, VS Code, and Git for students who request it. Second, use a cloud workspace — [Posit Cloud](https://posit.cloud) for R-flavoured work, [Google Colab](https://colab.research.google.com) for Python notebooks. Cloud setups will get you through chapters 1–10 without local installs. They struggle with Part III, where the book asks you to use a CLI agent on real files; for that, you really do need a machine you control.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Diagnosing a failed install — paste the error into your chat AI and it usually finds the cause faster than Googling.
+
+**Bluffs.** Telling you a package version exists when it does not. Recommending a deprecated install command from a 2022 blog post that lived in its training data. If a chat AI tells you to run a command and the command fails, do not run a second similar command on its say-so. Read the actual error.
+
+## Keep this with you, not the AI
+
+- The decision of *whether* to install something on a managed laptop. Ask your IT, not your AI.
+- Whether your data is sensitive enough to care about a free tier's privacy policy. Read the policy yourself for the one provider you use.
+- The choice between local Python and a cloud notebook. It is a real trade-off. Make it deliberately.
+
+## Try this
+
+Open a terminal right now. Type `python --version`. If it works, you are ready for [Chapter 0d](00d-python.qmd). If it does not — different command on Windows? — that is fine, [Chapter 0g — terminal basics](11-terminal-basics.qmd) will get you sorted.
+
+## AI and me
+
+After reading this chapter, write a one-line answer to each:
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+If you have never used Git, go to [Git for analysts](00b-git.qmd). If you have, jump to [Python environment](00d-python.qmd) and skim from there.

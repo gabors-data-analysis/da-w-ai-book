@@ -1,0 +1,105 @@
+---
+title: "Three harnesses: chat, IDE, CLI"
+---
+
+# Three harnesses: chat, IDE, CLI
+
+A chat window is one way to use an AI. It is not the only way, and for serious analytical work it is rarely the best one. This chapter introduces three *harnesses* — the actual interfaces through which you and an AI collaborate — and gives you a basis for choosing between them. The rest of the book is **harness-agnostic**: you can do almost everything in any of the three.
+
+## What you will get from this chapter
+
+- A working definition of "harness" and why the choice matters.
+- A short, honest description of each option.
+- A first opinion about which to start with for which task.
+
+## What "harness" means
+
+The model is the same across these tools — it is the same Claude or the same ChatGPT under the hood. What changes is the wiring around it. The wiring decides what the AI can *see* (just your prompt? a whole repository?) and what it can *do* (just produce text? edit your files? run code?).
+
+That wiring is the harness. Three of them are worth knowing.
+
+## Harness 1 — chat in the browser
+
+The thing you already know. ChatGPT, Claude, Gemini, all in a tab.
+
+**What it can see:** the messages you send it, plus files you upload (PDFs, CSVs, images).
+
+**What it can do:** produce text. Some chat tools will run small Python scripts in a sandbox and show you the result; useful for quick checks, not for working in your project.
+
+**Where it shines:** thinking out loud, drafting prose, asking *"is there a better way to do this?"*, getting unstuck, exploring an unfamiliar codebook. Anything that does not require AI to live inside your project.
+
+**Where it limps:** anything where the AI needs to read or write more than one file. Anything where you would have to copy code in, run it, copy the error back, copy the next code out. After a few rounds of that, switch harness.
+
+## Harness 2 — IDE plus AI assistant
+
+A code editor with an AI tightly integrated into it. **VS Code with GitHub Copilot** is the canonical version. Cursor and Windsurf are independent editors built around the same idea. RStudio with Copilot also works.
+
+**What it can see:** the file you are editing, the surrounding files in your project, sometimes the whole project depending on the tool's setting.
+
+**What it can do:** suggest the next few lines as you type (autocomplete on steroids), rewrite a function you select, generate a test, answer questions about the file in a chat panel.
+
+**Where it shines:** writing code, line by line, while you stay in the driver's seat. Refactoring. Adding tests. Adding documentation. Understanding an unfamiliar codebase by asking questions that the assistant can answer with full file context.
+
+**Where it limps:** big multi-step changes that span many files. Running and inspecting the result of code, beyond syntax. You can do these in an IDE-with-AI, but you are pushing the harness past its sweet spot.
+
+## Harness 3 — CLI agent
+
+A command-line tool that you start in a project folder, and that you talk to in plain English while it reads, writes, and runs files in that folder. **Claude Code** is the default in this book. **Codex CLI** (OpenAI), **Cursor** in agent mode, and **Aider** are alternatives.
+
+**What it can see:** every file in the folder you started it in, by default.
+
+**What it can do:** read files, write new files, edit existing ones, run shell commands and scripts, see the output, fix what broke. With your permission.
+
+**Where it shines:** end-to-end work. *"Download this CSV from this URL, clean it according to these rules, run this regression, render a one-page PDF."* The agent runs, the agent fails, the agent reads its own error, the agent fixes it. You watch.
+
+**Where it limps:** when *you* are not paying attention. A CLI agent will cheerfully spend twenty minutes going down a wrong path you would have caught in two. The harness's strength — autonomy — is also its risk.
+
+## A short comparison
+
+| Harness | What you give it | What you get back | Best for |
+|---|---|---|---|
+| **Chat** | A message | Text, sometimes a small image or run | Thinking, drafting, getting unstuck |
+| **IDE + AI** | A file (or selection) | Edits to that file, suggestions as you type | Writing code, refactoring, asking about a codebase |
+| **CLI agent** | A goal | Reads, edits, and runs files in your project | End-to-end tasks, multi-step pipelines |
+
+## Which to pick first
+
+If you are starting from zero:
+
+1. Get a **chat** account. You already have one if you finished the previous chapter. Use it for everything not directly involving your code.
+2. Set up **VS Code with Copilot** when you start writing real Python scripts. The IDE+AI combination doubles your speed at the kind of code Parts II and IV ask you to write.
+3. Install a **CLI agent** when you reach Part III. That is the moment the agent earns its place.
+
+You can do the entire first half of the book in chat alone. You can do all of the second half in a CLI agent alone. Most readers end up using all three, picking by task. *That is the point.*
+
+## A note on the rest of the book
+
+Chapters from Part II onwards are written so that the workflow they describe runs in any of the three harnesses. Where the harness changes the answer in a meaningful way, the chapter has a short callout. We do not standardise on one tool. We standardise on the *task*; you bring the harness.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Telling you which harness to use for a specific task you describe.
+
+**Bluffs.** Asserting that one harness "always" beats another. The comparisons above are real *for the work in this book*; for other domains the right answer differs.
+
+## Keep this with you, not the AI
+
+- Which harness you reach for first. Pick deliberately. You can always switch.
+- How much autonomy to grant a CLI agent. The agent will do what you let it do; the *what you let it do* is your call, every time.
+- The point at which you have over-delegated. If you cannot describe what the agent did in the last fifteen minutes, you have.
+
+## Try this
+
+Pick one task you have done by hand recently — cleaned a CSV, drafted a paragraph, written a small function. Do it again three times: once in your chat AI, once in VS Code with Copilot if you have it, once in your head. Compare. Notice which harness was annoying for which task.
+
+This takes twenty minutes. It is the cheapest way to develop a feel for what the rest of the book is teaching you.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+The next three chapters set up the harnesses one by one: [Terminal basics](11-terminal-basics.qmd), [VS Code + Copilot](13-vscode-copilot.qmd), and [Installing a CLI agent](12-install-cli.qmd). Pick the order that matches what you are about to use first.

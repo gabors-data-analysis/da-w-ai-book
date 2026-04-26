@@ -1,118 +1,98 @@
 ---
-title: "Which AI Model Should I Use?"
+title: "Which AI model should I use?"
 ---
 
-# Which AI Model Should I Use?
+# Which AI model should I use?
 
-Models change every quarter; the decision rule does not. Here is how to pick one without overspending or under-tooling, and how to revise the decision when the next leaderboard drops.
+The leaderboard moves every quarter. The right way to think about the choice does not. This chapter gives you a decision rule that survives a model update.
 
-In what follows, here is my personal take as of `date:2026-03-06`.
+## What you will get from this chapter
 
+- A simple recipe for picking a model on a given task.
+- A short note on what *paid* and *thinking* tiers buy you.
+- A grown-up answer to *"is one provider better than the others?"*.
 
-## Basics
+## The recipe
 
-Generative AI based on Large Language Models (genAI) is a powerful tool with a series of decisions by users. This is my guide with a focus on task related to analyzing data. 
+For analytical work the question *"which model"* almost always reduces to four sub-questions. In order:
 
-### Leading models
+1. **Quality on your task.** Run the same real prompt through two candidates. Compare the outputs on something concrete you can judge.
+2. **Cost.** How much will the task cost when you do it on real data?
+3. **Latency.** Is it fast enough for your loop — typing, asking, reading, fixing?
+4. **Context window.** Can it fit the documents, examples, and schema you want to send?
 
-* As of now the leading (state of the art, SOTA) models are Google's Gemini (3.0), OpenAI's ChatGPT (5.4), and Anthropic's Claude Opus (4.6.)
-* Other key model is [Mistral AI](https://mistral.ai/) but there are several others
-* Open source -- open weights models are also quite good, [Kimi (K2.5)](https://www.kimi.com/ai-models/kimi-k2-5), an open weight model, is quite good and free. Deepseek, Qwen the other leading models. Think of them as SOTA 4-9 months ago 
+Pick the cheapest model that passes the quality bar. Move up only when the smaller one fails on something you care about.
 
+This is unglamorous. It also means you stop arguing about benchmarks and start picking based on your work.
 
-### Paid vs free of leading providers
+## Three classes of model, in plain words
 
-* Most models have a free and paid tiers. 
-* Free ones are good as kind of Google search replacement for everyday tasks and chats. 
-* For serious work you'll be better off with paid tiers or open source models that are much cheaper. (see comparison at [open router](https://openrouter.ai/models) or [price per token](https://pricepertoken.com/)) 
+Frontier providers (Anthropic, OpenAI, Google) ship models in two tiers and a wrinkle.
 
-### Thinking
+- **Flagship.** The strongest the provider sells, slow-ish and expensive. Examples in this edition: Claude **Opus 4.7**, ChatGPT **5.5**, Gemini **3.0**. Use for hard reasoning, long-context tasks, the prompts that really benefit from "think a bit more."
+- **Workhorse.** Cheaper, faster, almost as good for most analytical work. Examples: Claude **Sonnet 4.6**, ChatGPT **5 / 5-mini**, Gemini **3.0 Flash**. *Default to this tier for most coding, classification, and routine document tasks.* You will almost always be fine.
+- **Tiny / Haiku.** Smallest, cheapest, fast. Examples: Claude **Haiku 4.5**, ChatGPT **Nano**. Good for batch classification, tagging, and any task you will run thousands of times. Cost matters more than quality at scale.
 
-* Each model have faster (cheaper) and thinking (more expensive) variants, such as Sonnet and Opus for Claude, Thinking and Instant for ChatGPT. In addition you can have extended thinking 
-* For data analysis work, the thinking variants are recommended.
-* All major models have deep research 
+A useful rule of thumb: the workhorse tier is **5–15× cheaper** than flagship per token, and the tiny tier is **5–10× cheaper again** than workhorse. The difference adds up fast in API work.
 
-### Tools
+## "Thinking" mode
 
-* All major models support tool use (e.g. web browsing, code execution) and agentic patterns (multi-step workflows with memory and tool use).
-* Currently Gemini is the weakest here
+Most providers now ship a **thinking** or **extended-thinking** mode where the model deliberates internally before producing the visible answer. Costs more (you pay for the internal deliberation in tokens). Helps on hard reasoning tasks, often dramatically. Helps less on routine ones.
 
+Heuristic: turn it on for the prompt that will set the rest of your project's direction (research design, identification strategy, regression specification). Turn it off for prompts that are essentially "format this nicely."
 
-## Use cases
+## Free vs. paid
 
-AI  is great for many tasks. In this course we only focus on aspects of Data Analysis:
+The free tiers of every major provider are surprisingly capable in 2026. The paid tiers ($20/month-ish) buy you:
 
-* designing analysis
-* writing code
-* data wrangling such as joining tables, sample design, variable transformations
-* exploratory data analysis
-* modelling, regressions, machine learning
-* causal inference
-* creating tables and graphs
-* writing reports and presentations
+- Bigger context — the difference between *"I uploaded a paragraph of the codebook"* and *"I uploaded the codebook."*
+- Higher daily message limits.
+- Access to the agent / code features without random throttling.
+- Often: the actual flagship model rather than a workhorse.
 
+For going through this book once, paid for a single provider is enough. The book does not assume you have all three.
 
-## Models for data analysis
+## Privacy briefly, again
 
-For data-analysis projects, my current recommended approach is: paid Claude. 
+We covered this in [Chapter 0e](00e-ai-account.qmd). One sentence here: assume non-zero exposure on free tiers; assume "no training on your prompts" on paid consumer tiers and on API tiers; read the policy of the one provider you actually use. Do not paste real personal data into any of them.
 
+## Which is *best*?
 
+Honest answer: it depends on the task, and the gaps between flagship models are smaller than the gaps between *using a model well* and *using it badly*. As of this edition, the working preferences in this book are:
 
-## Research & Writing
-* **Synthesis Over Summarization**: AI tools increasingly synthesize multi-source inputs into structured insights rather than paraphrasing single documents.
-* **Security & Privacy**: Modern workspaces rely on **isolated execution contexts**; strong non-training guarantees apply primarily to paid and enterprise tiers.
-* **Multimodal Capability**: AI can interpret charts, screenshots, and handwritten notes and incorporate them into drafts.
+- **Day-to-day analytical chat:** Claude Opus 4.7 or ChatGPT 5.5 — interchangeable for almost every prompt in this book.
+- **Coding agent in the terminal:** Claude Code, because the agent and the model are co-designed.
+- **Bulk classification of text:** the workhorse tier of either Claude or ChatGPT.
+- **Long-document tasks** (300+ pages of PDF): Gemini, sometimes, when the others struggle with the length.
 
-## For data analysis workspaces -- comparison 
+These are working preferences in 2026. They will change. The decision rule will not.
 
-*Last update: 16 Jan 2026*
+## What changes between editions
 
-| Workspace | 2026 Key Features |
-|:---|:---|
-| **Anthropic Claude Artifacts** | • Creates **interactive applications** (tutors, calculators) within the output window.<br>• Real-time iteration on complex document structures. |
-| **OpenAI ChatGPT Canvas** | • Advanced frontier models with contextual persistence for tone and style.<br>• Inline editing with granular control over specific sections. |
-| **Google NotebookLM** | • **Interactive Audio Overviews** with user interruption and questioning.<br>• Grounded citations linked directly to uploaded source segments. |
-| **Perplexity Pages** | • Multi-source synthesis using live web retrieval.<br>• Inline citation and consistency checking against sources. |
+Some things in this chapter that are *guaranteed* to age: the specific model names, the specific prices, the order of the leaderboard. The yearly spring edition refreshes them. If you are reading this on the website, that is the live version; if you are reading a static copy, check the date on [Chapter — versions](../versions.qmd).
 
+## Where AI helps · Where AI bluffs
 
-## Data Analysis details
-* **Sandboxed Execution**: Code runs in secure, ephemeral environments with no local system access.
-* **Statistical Rigor**: Strong support for Python-based libraries (e.g. pandas, scikit-learn) for exploratory and predictive analysis.
-* **Direct Integration**: AI can manipulate data directly within spreadsheets or dedicated analysis windows.
-* **Limits**: Reproducibility, package versions, and state persistence remain constrained relative to local workflows.
+**Helps.** Comparing two models on a real task you give it. (Open both in browser tabs; paste the same prompt; read both answers.) Explaining what a benchmark on a leaderboard is actually measuring.
 
-## Data Analysis details
-| Workspace | 2026 Key Features for Analysis |
-|:---|:---|
-| **ChatGPT Data Analysis** | • Executes Python in managed compute environments for multi-file datasets.<br>• Assisted data cleaning and predictive modeling workflows. |
-| **Claude Analysis** | • High-fidelity **SVG and lightweight interactive output**.<br>• Fast iteration on statistical tables with publication-ready formatting. |
-| **Google Gemini in Sheets** | • **Multimodal cleaning**: converts screenshots or PDFs into structured tables.<br>• Natural-language formula generation and transformations. |
-| **Microsoft Copilot in Excel** | • **Native Python-in-Excel** for statistical scripts inside spreadsheets.<br>• Automated pivots, summaries, and forecasting via prompts. |
+**Bluffs.** Asserting one model is "best" without specifying for what. Recommending a paid tier when the free one would have been fine for your use. Citing benchmarks from before its training cut-off as if they are current.
 
+## Keep this with you, not the AI
 
-## Coding Assistance
-* **Agent-Assisted Workflows**: AI can coordinate multi-step tasks such as refactoring or bug fixing across large codebases, with human review.
-* **Environment Security**: Code is tested in **secure sandboxes** before changes are proposed.
-* **Interconnected Tools**: Integrated with development and collaboration platforms (e.g. Jira, Slack).
+- Which provider you commit to for the duration of this book.
+- The decision to upgrade tier (workhorse → flagship, free → paid) when a real task fails on the smaller one — *not* before.
+- The line between *"this answer is wrong because the model is wrong"* and *"this answer is wrong because my prompt was wrong."* Almost always, it is the second.
 
+## Try this
 
-## Coding Assistance --- comparison
-| Workspace | 2026 Key Features for Developers |
-|:---|:---|
-| **Anthropic Claude Code** | • Native **VS Code extension** with agent-style workflows and inline diffs.<br>• Supports complex multi-file edits and testing assistance. |
-| **GitHub Copilot** | • Uses **Extensions** to interact with external dev tools (Azure, Slack, Jira).<br>• Deep context from local and remote repositories. |
-| **Cursor** | • AI-first editor with awareness of project-wide dependencies.<br>• Strong support for iterative refactors across files. |
-| **Windsurf (Codeium)** | • **Cascade mode** for orchestrating large-scale refactors.<br>• Robust free tier for students and individual users. |
+Pick one prompt you ran in [Chapter 0e](00e-ai-account.qmd). Run it again on a *cheaper* model from the same provider — workhorse if you used flagship, tiny if you used workhorse. Compare. Most of the time the cheaper answer is good enough; if so, that is your default for the rest of the book.
 
-**Security note:** SOC2 compliance is common; strict zero-retention guarantees typically apply to enterprise or explicitly configured accounts.
+## AI and me
 
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
 
-## What changed from 2025 Q2
+## Where to go next
 
-* No need to think much re which models to use. 
-* Leading models similar capability, but different. Not really sure how... 
-
-
-## Feedback
-Dear Reader. I have limited experience. Suggestions are welcome, please post an issue.
-
+[Glossary of LLM terms](04-glossary.qmd) for reference, or skip to [Prompting basics](04a-prompting-basics.qmd) for the practical follow-up.

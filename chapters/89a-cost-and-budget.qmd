@@ -4,28 +4,107 @@ title: "Cost and budget"
 
 # Cost and budget
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+A short, practical chapter on staying out of trouble with AI bills. Aimed at the student-budget reader, but the habits travel. Most readers can do this entire book — including the labs and the capstone — for under fifteen US dollars in API spend, plus a couple of months of one paid chat subscription if you choose.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-A short, practical chapter on staying out of trouble with AI bills. Aimed at the student-budget reader.
+- A working understanding of how the bill is computed.
+- Two ways to overspend without realising, and the safety nets that prevent both.
+- A budget for the whole book.
 
-- The price model, in one paragraph: most APIs charge by the *token* (a chunk of text, roughly three-quarters of a word). Input and output are priced separately. Smaller models cost ten to twenty times less than the flagship ones.
-- A budget for the whole book: under ten US dollars in API spend for a careful student doing every lab and the capstone.
-- The two ways to overspend without realising: long context windows on a flagship model, and runaway loops in code that doesn't bail out on errors.
-- Two safety nets: spending limits in the provider's console, and a hard `max_tokens` on every API call.
-- When the smaller model is fine — most of the time, for tagging, classification, and short summaries.
-- When the bigger model earns its keep — long-context reasoning, code generation across many files, the few prompts where quality really moves with model size.
+## How the bill works
 
-## Where this chapter fits
+Most AI providers charge **by the token**. A token is a chunk of text — about three quarters of an English word.
 
-Closes Part IX, alongside academic integrity. Both are "working honestly" — one with your reader, one with your wallet.
+- **Input tokens** — what you send (your prompt, attached files, prior turns). Cheaper.
+- **Output tokens** — what the model produces. Roughly 4–5× the price of input tokens.
+- **Thinking tokens** (for "extended thinking" modes) — internal reasoning the model does before answering. Charged like output tokens.
 
-## TODO for the author
+Pricing as of this edition, in dollars per million tokens, rough order of magnitude:
 
-- A worked example: the capstone's text-to-expectations pipeline, costed out at flagship vs. small-model prices.
-- One screenshot-free walkthrough of setting a hard spending limit on each major provider.
-- A "first thing to do when the bill is bigger than you expected" recipe.
+| Tier | Input | Output |
+|---|---|---|
+| Tiny (Haiku, Nano) | $0.50–$1 | $2–$5 |
+| Workhorse (Sonnet, GPT-5) | $2–$5 | $10–$20 |
+| Flagship (Opus, GPT-5 thinking) | $10–$20 | $40–$80 |
+
+Two implications.
+
+- **Most prompts cost cents, not dollars.** A 500-word prompt in, 500-word answer out, on a workhorse model: under one US cent.
+- **Bulk classification is the only thing that adds up.** When you tag 5,000 articles, you suddenly do care which tier you are on.
+
+## Two ways to overspend
+
+**1. Long context on a flagship model.**
+
+Pasting 50 pages of text into a flagship-tier prompt and asking a small question is the most expensive thing you can do in this book. Each call sends 50 pages of input *every time*. Ten exploratory questions on the same long document = ten times the input cost.
+
+Mitigation: use a *workhorse* model for routine questions on long documents. Use the flagship only when the task itself is hard, not when the input is long.
+
+**2. Runaway loops in code.**
+
+A `for` loop over a CSV that calls the API once per row, with no error handling, can burn through a whole budget if something hangs and retries silently. We see this every term. The fix is in [Chapter 27](27-llm-apis-python.qmd) but worth flagging now.
+
+Mitigations:
+
+- **Set a hard `max_tokens`** on every API call. Default to something small (300 tokens out is plenty for a classification).
+- **Test on 10 rows first.** Always. Then 100. Then the full file. The first time you discover a bug, you want to discover it at 10-row scale.
+- **Print incremental progress.** A loop that silently runs is a loop that silently overspends.
+
+## The safety nets
+
+Every major provider's console has a **spending limit**. Set it. Two minutes; saves an entire term.
+
+- **Anthropic Console.** Settings → Plans & Billing → Spend limits. Set a monthly hard limit (try $20). Set an alert at half.
+- **OpenAI Platform.** Settings → Billing → Limits. Same shape.
+- **Google AI Studio / Vertex.** Same shape, slightly buried in the Google Cloud console.
+
+The hard limit is the difference between *"I had a bug and lost 80 cents"* and *"I had a bug and burned my month's coffee budget."*
+
+## A budget for this book
+
+Rough numbers, on the assumption of a careful student doing every lab and the capstone.
+
+- **Front matter through Part V (chapters 0–24).** Free chat tier or one paid subscription. *Zero API spend.*
+- **Part VI (APIs).** A handful of small API calls in chapters 25–30. Under $1 if you stick to workhorse tier.
+- **Capstone Session 2 (Part VII Ch 33).** This is where text classification happens at scale. A pipeline over ~1,000 articles on a workhorse model: roughly $3–$8. On a tiny model: under $2. On a flagship model with no `max_tokens`: easily $30. Choose accordingly.
+- **Everything else.** A few dollars of slack for experiments.
+
+Total realistic budget: **under $15**. If you hit $50 you have a runaway loop or are using flagship for everything; investigate before paying.
+
+## When the bigger model earns its keep
+
+To balance the chapter's tone: there are real cases where flagship is worth the extra money.
+
+- **One-shot reasoning prompts** that set the rest of your project's direction (research question, identification strategy, study design). Ten extra cents to get a noticeably better answer is a deal.
+- **Long, careful code generation** where flagship is more reliable than workhorse on multi-file edits. The CLI agent in Part III is one of these.
+
+In every other case, default to workhorse, and switch up only when the smaller model fails on something specific.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Estimating a token cost from a prompt you describe. Suggesting a smaller-tier model for a task. Walking you through the spending-limit settings of a console you have not used.
+
+**Bluffs.** Confidently quoting current prices. Prices change every quarter; an AI's training data lags. *Always confirm prices on the provider's pricing page* before betting on a budget.
+
+## Keep this with you, not the AI
+
+- The hard spending limit. Set it.
+- The decision of which tier to run a particular pipeline on.
+- The choice of *when to stop iterating*. AI will keep generating as long as you keep asking.
+
+## Try this
+
+Open the console of the AI provider whose API you plan to use. Find the *Limits* page. Set a monthly hard limit of $10 — you can raise it if you need to, but starting low forces good habits. Set an email alert at $5.
+
+Total time: two minutes. Insurance for the rest of the book.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+End of Part IX. The Reference part has [Case studies](90-case-studies.qmd) and [Where to go from here](91-beyond.qmd). The book proper ends here; the labs in Part VIII give you the practice.

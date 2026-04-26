@@ -4,311 +4,111 @@ title: "VS Code and Copilot"
 
 # VS Code and Copilot
 
-An IDE-based alternative path. Copilot in VS Code is a different shape of tool from a CLI agent — useful to know both.
+VS Code is a code editor. GitHub Copilot is an AI assistant that lives inside it. Together they are the IDE harness for this book — the right tool for writing code, line by line, while you stay in charge.
 
-## Overview
+## What you will get from this chapter
 
-This guide helps you set up:
+- VS Code installed and opening on your laptop.
+- A working Python setup inside VS Code.
+- Copilot active, with a sense of how to use it without letting it drive.
 
-1. Visual Studio Code
-2. **Either** Python **or** R in VS Code
-3. GitHub Copilot in VS Code
+## Install VS Code
 
-Estimated time: 20-40 minutes.
+Download the installer from [code.visualstudio.com](https://code.visualstudio.com) and run it. On macOS, drag the app into *Applications*. On Windows, accept the default install options; check the box that says *Add to PATH*. On Linux, your distribution probably has a `.deb` or `.rpm` package; the website will offer one.
 
-::: {.callout-note}
-## Terminal commands in this guide
-This setup uses several terminal commands (for checks like `code --version`, `python --version`, and `R --version`).
-If you are new to terminals, read [Terminal Basics](terminal-basics.html) first.
-:::
+Open VS Code once. Close any "welcome" tabs.
 
----
+## Add Python support
 
-## Before You Start
+In VS Code's left sidebar, click the *Extensions* icon (four squares). Search for *Python*. Install the one published by **Microsoft** — there are imitators; this is the one you want.
 
-- A stable internet connection
-- A GitHub account (create one at <a href="https://github.com/" target="_blank">github.com</a> if needed)
-- Permission to install software on your computer
+While you are there, install:
 
----
+- *Pylance* (usually bundles with the Python extension).
+- *Jupyter* if you plan to work with notebooks.
 
-## Step 1: Choose Your OS
+Open a Python file (or create one called `test.py` with `print("hello")`). VS Code asks you to pick an interpreter — point it at the virtual environment from [Chapter 0d](00d-python.qmd). Run the file with the play button in the top right. If `hello` prints in the terminal panel, you are set.
 
-Select your OS once, then stay in that tab for the language setup so you only see one platform path.
+## Add Copilot
 
-Official docs:
+Two extensions:
 
- - <a href="https://code.visualstudio.com/docs/setup/windows" target="_blank">VS Code on Windows</a>
- - <a href="https://code.visualstudio.com/docs/setup/mac" target="_blank">VS Code on macOS</a>
+- *GitHub Copilot* — the autocomplete that suggests the next few lines as you type.
+- *GitHub Copilot Chat* — a chat panel that can answer questions about the code in front of you.
 
-::: {.panel-tabset}
+Both ask you to sign in with GitHub. Do.
 
-### Windows
+If you have a paid Copilot subscription (or claimed the free *Student Developer Pack* from [Chapter 0c](00c-github.qmd)), Copilot will start working immediately. Without one, the free tier is limited but enough to taste it.
 
-#### Install VS Code
+## How to use Copilot well
 
-1. Download VS Code from <a href="https://code.visualstudio.com/Download" target="_blank">code.visualstudio.com</a>
-2. Run `VSCodeUserSetup-{version}.exe`
-3. Keep the default **User setup** install unless you specifically need system-wide install
-4. Reopen terminal after install
+The thing Copilot does most: as you type code, faded suggestions appear ahead of your cursor. *Tab* accepts; *Esc* dismisses; just keep typing to ignore.
 
-Quick check:
+Three small habits will save you grief.
 
-```bash
-code --version
-```
+**1. Keep typing your intention before letting it complete.** A clear half-line — `# load the hotels CSV and parse the date column as datetime` — gets you a much better completion than a bare `df = `.
 
-#### Step 2: Choose One Language Path
+**2. Read what it suggests before you press Tab.** The whole point of having an editor with AI in it is that you see the code. If you press Tab without reading, you have downgraded the harness to "chat with extra steps."
 
-Pick one language to start. You can install the other one later.
+**3. Use Copilot Chat for "why" and "what's wrong."** Open the chat panel (`Ctrl/Cmd+Shift+I`), select a chunk of code, and ask. *"Why is this regression returning NaN coefficients?"* Copilot Chat sees the file; it will look first.
 
-::: {.panel-tabset}
+## A worked example
 
-#### Python
-
-Official docs:
-
- - <a href="https://code.visualstudio.com/docs/languages/python" target="_blank">Python in VS Code</a>
- - <a href="https://www.python.org/downloads/windows/" target="_blank">Python downloads (Windows)</a>
-
-##### Install Python + VS Code support
-
-1. Install the latest stable Python 3 from <a href="https://www.python.org/downloads/windows/" target="_blank">python.org</a>
-2. Open a new terminal and check:
-
-```bash
-py --version
-```
-
-If `py` is not available, try:
-
-```bash
-python --version
-```
-
-3. Open VS Code
-4. Open Extensions (`Ctrl+Shift+X`)
-5. Install **Python** (publisher: Microsoft)
-6. Run Command Palette and select: `Python: Select Interpreter`
-7. Choose your installed Python interpreter
-
-##### Test Python
-
-Create `hello.py`:
+Imagine you have a CSV of EU air-quality readings and you want a daily mean by city. You type:
 
 ```python
-print("Hello from Python in VS Code")
+# load eea_air_quality_2023.csv and compute the daily mean of PM2.5 by city
 ```
 
-Run it with the play button ("Run Python File") or terminal.
-
-#### R
-
-Official docs:
-
- - <a href="https://code.visualstudio.com/docs/languages/r" target="_blank">R in VS Code</a>
- - <a href="https://cloud.r-project.org/" target="_blank">Install R</a>
-
-##### Install R + VS Code support
-
-1. Install R from <a href="https://cloud.r-project.org/" target="_blank">cloud.r-project.org</a>
-2. During install, keep defaults (recommended: let installer store version info in registry)
-3. Open a new terminal and check:
-
-```bash
-R --version
-```
-
-4. In VS Code Extensions, install **R** (publisher: REditorSupport)
-5. Install `languageserver` in R:
-
-```r
-install.packages("languageserver")
-```
-
-This package enables IntelliSense-style features in VS Code (autocomplete, diagnostics, and hover help).
-
-6. In VS Code, open Command Palette and run: `R: Create R terminal`
-
-##### Test R
-
-Create `hello.R`:
-
-```r
-x <- 2 + 2
-print(x)
-```
-
-Run with `Ctrl+Enter` in an R terminal.
-
-:::
-
-### macOS
-
-#### Install VS Code
-
-1. Download VS Code from [code.visualstudio.com](https://code.visualstudio.com/Download)
-2. Open the `.dmg`
-3. Drag **Visual Studio Code.app** into **Applications**
-4. Open VS Code, and open Command Palette (`Cmd+Shift+P`) to run:
-   - `Shell Command: Install 'code' command in PATH`
-5. Open a terminal in VS Code
-
-Quick check:
-
-```bash
-code --version
-```
-
-#### Step 2: Choose One Language Path
-
-Pick one language to start. You can install the other one later.
-
-::: {.panel-tabset}
-
-#### Python
-
-Official docs:
-
- - <a href="https://code.visualstudio.com/docs/languages/python" target="_blank">Python in VS Code</a>
- - <a href="https://www.python.org/downloads/macos/" target="_blank">Python downloads (macOS)</a>
-
-##### Install Python + VS Code support
-
-1. Install the latest stable Python 3 from <a href="https://www.python.org/downloads/macos/" target="_blank">python.org</a>
-2. Open a new terminal and check:
-
-```bash
-python3 --version
-```
-
-::: {.callout-note}
-If you are on macOS, you may be prompted to install Xcode Command Line Tools when running Python or opening a terminal for the first time. Follow the prompts to install if needed.
-:::
-
-3. Open VS Code
-4. Open Extensions (`Cmd+Shift+X`)
-5. Install **Python** (publisher: Microsoft)
-6. Run Command Palette and select: `Python: Select Interpreter`
-7. Choose your installed Python interpreter
-
-##### Test Python
-
-Create `hello.py`:
+Copilot suggests:
 
 ```python
-print("Hello from Python in VS Code")
+import pandas as pd
+
+df = pd.read_csv("eea_air_quality_2023.csv", parse_dates=["timestamp"])
+daily = (
+    df.groupby([df["timestamp"].dt.date, "city"])["pm25"]
+      .mean()
+      .reset_index(name="pm25_daily")
+)
 ```
 
-Run it with the play button ("Run Python File") or terminal.
+You read it. The column name `pm25` matches your file (you check). You press Tab. You run it. You print `daily.head()`. You confirm a city you already know about — Vienna, say — has plausible numbers. You move on.
 
-#### R
+That whole cycle, including the check, takes ninety seconds. By hand it takes ten minutes.
 
-Official docs:
+## VS Code as a terminal
 
- - <a href="https://code.visualstudio.com/docs/languages/r" target="_blank">R in VS Code</a>
- - <a href="https://cloud.r-project.org/" target="_blank">Install R</a>
+VS Code has a terminal pane built in (`` Ctrl/Cmd+` ``, the backtick). This means you can do everything from [Chapter 0g — terminal basics](11-terminal-basics.qmd) inside VS Code, without alt-tabbing. Many readers stop opening a separate Terminal app once they discover this.
 
-##### Install R + VS Code support
+## A note on alternatives
 
-1. Install R from <a href="https://cloud.r-project.org/" target="_blank">cloud.r-project.org</a>
-2. Open a new terminal and check:
+**Cursor** and **Windsurf** are independent editors built on VS Code's open-source core, with deeper AI integration. Their autocomplete and chat features tend to be a step ahead of Copilot's at any given moment, at the cost of being less stable and less universally supported. If you already use one, fine. The book does not assume them.
 
-```bash
-R --version
-```
+**RStudio** with the Copilot integration also works for the chapters that are language-agnostic. Where the chapter is Python-specific (most of them are), VS Code is the better fit.
 
-3. In VS Code Extensions, install **R** (publisher: REditorSupport)
-4. Install `languageserver` in R:
+## Where AI helps · Where AI bluffs
 
-```r
-install.packages("languageserver")
-```
+**Helps.** Writing the boilerplate at the top of a script. Suggesting the next few lines of an obvious computation. Drafting tests for a function you just wrote. Explaining a chunk of unfamiliar code in plain language.
 
-This package enables IntelliSense-style features in VS Code (autocomplete, diagnostics, and hover help).
+**Bluffs.** Suggesting code that *looks* right and uses a method that does not exist on the object you are calling it on. Inventing column names that match the spirit of your file but not the letter. Confidently completing a regression with the wrong sample restriction. The IDE harness is fast; that is the danger.
 
-5. In VS Code, open Command Palette and run: `R: Create R terminal`
+## Keep this with you, not the AI
 
-##### Test R
+- *Whether to accept a suggestion.* Read it first. Every time.
+- *The shape of the code you want.* Copilot fills in the lines; you decide the structure of the script.
+- *What "done" looks like.* Copilot will keep suggesting until you tell it to stop.
 
-Create `hello.R`:
+## Try this
 
-```r
-x <- 2 + 2
-print(x)
-```
+Open VS Code. Open a folder with one of your old scripts. Add a comment at the top of a function: `# add a docstring`. Watch what Copilot suggests. Edit it until it actually reflects what the function does. Save. Total time: five minutes. You have now used the IDE harness for real.
 
-Run with `Cmd+Enter` in an R terminal.
+## AI and me
 
-:::
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
 
-:::
+## Where to go next
 
----
-
-## Step 2: Set Up GitHub Copilot in VS Code
-
-Official docs:
-
- - <a href="https://code.visualstudio.com/docs/copilot/setup" target="_blank">Set up GitHub Copilot in VS Code</a>
- - <a href="https://docs.github.com/en/copilot/get-started/plans" target="_blank">GitHub Copilot plans</a>
-
-1. Open VS Code
-2. In the status bar, click the Copilot icon and choose **Use AI Features**
-3. Sign in to GitHub when prompted
-4. If you do not already have a plan, you can start with **Copilot Free**
-5. Open a code file and verify Copilot is active (chat panel opens and/or inline suggestions appear)
-
-### Student note
-
-If you are a verified student, apply for the free student Copilot Pro plan ("student plus" upgrade).
-
-Quick quota diff (checked February 17, 2026):
-
-- **Copilot Free:** 2,000 code completions/month, 50 chat messages/month, and 50 premium requests/month
-- **Student plan (Copilot Pro at $0):** unlimited code completions, unlimited chat interactions in IDE/CLI/mobile, and 300 premium requests/month
-
-If you are eligible, this is a large jump in included usage, so it is worth applying early.
-
- - <a href="https://docs.github.com/en/copilot/how-tos/manage-your-account/get-free-access-to-copilot-pro" target="_blank">Get free access to Copilot Pro (students/teachers/maintainers)</a>
-
----
-
-## Quick Troubleshooting
-
-### `code` command not found
-
-- Windows: close and reopen terminal after install
-- macOS: run `Shell Command: Install 'code' command in PATH` from Command Palette, then restart terminal
-
-### Python interpreter not found in VS Code
-
-1. Run `Python: Select Interpreter`
-2. If nothing appears, reinstall Python and restart VS Code
-
-### R not found (Windows)
-
-You might need to add the R.exe location such as 'C:\Program Files\R\R-4.3.3\bin' to 'PATH'
-
-```
-Start → search “Environment Variables” → “Edit the system environment variables”, 
-Environment Variables…
-Under your user (or System) variables: Path → Edit → New
-Paste the ...\bin path → OK → reopen cmd
-```
-
-### R extension works but no IntelliSense
-
-Install in R:
-
-```r
-install.packages("languageserver")
-```
-
-Then restart VS Code.
-
-### Copilot sign-in issues
-
-1. In VS Code, use Accounts menu to sign out/in GitHub
-2. Check your Copilot plan at <a href="https://github.com/settings/copilot" target="_blank">github.com/settings/copilot</a>
-
+[Installing a CLI agent](12-install-cli.qmd) for the third harness — or jump to Part I if your first reading pass is going to live in chat and IDE only.

@@ -38,15 +38,15 @@ da-w-ai-book/
     └── publish.yml      # render + deploy to gh-pages on every push to main
 ```
 
-The book has **eight narrative parts plus front and back matter**:
+The book has **nine narrative parts plus front and back matter**:
 
 | Part | Focus |
 |---|---|
 | Front matter | Preface, How to use, Edition + model snapshot |
-| **Part 0** | Set up your tools — git, GitHub, Python, AI account |
+| **Part 0** | Tools and harnesses — git, GitHub, Python, AI account, *plus* a "three harnesses" overview, terminal, VS Code+Copilot, and CLI agent |
 | **Part I** | What an LLM is, and what it isn't |
-| **Part II** | Working with AI in chat |
-| **Part III** | From chat to CLI — agentic workflows |
+| **Part II** | Working with AI: data foundations |
+| **Part III** | Working at scale: agents and pipelines |
 | **Part IV** | Text as data |
 | **Part V** | AI in empirical research — controls, IV |
 | **Part VI** | APIs and automation |
@@ -56,7 +56,9 @@ The book has **eight narrative parts plus front and back matter**:
 | Reference | Case studies, where to go from here, the linear plan |
 | Appendix | Rights, acknowledgements, thanks |
 
-Many chapters are currently inlined source content from the live course, slated for rewrite to the chapter template. Part 0, parts of Part I, and Part IX are placeholder stubs awaiting their first draft.
+The book is **harness-agnostic**: chat, IDE+Copilot, and CLI agent are introduced together in Part 0, and the rest of the chapters are written so the workflow runs in any of the three.
+
+The first wave of chapters (18, totalling ~25,000 words) is drafted to the chapter template — Part 0 in full, Part I in full, the foundational chapters of Part II, and Part IX. The remaining chapters are inlined source content from the live course, awaiting the same rewrite pass. See [linear-plan.qmd](linear-plan.qmd) for the full migration status.
 
 ## Editorial decisions (locked for Spring 2026)
 

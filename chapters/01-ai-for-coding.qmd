@@ -1,292 +1,93 @@
 ---
-title: "AI for Coding — A Primer"
+title: "AI for coding work"
 ---
 
-# AI for Coding — A Primer
+# AI for coding work
 
-A quick lap around using AI for code, before we go any further. If you have used Copilot, ChatGPT for a function, or paired with an LLM on a script, this is review. If not, it sets the floor for everything that follows.
+Before we look at what an LLM is, it helps to know what it has changed about coding. The short answer: a lot of the boring middle, and almost none of the careful edges. This chapter sets the practical floor that the rest of the book builds on.
 
-::: {.callout-warning}
-## Content moved
-The **Creating Graphs** exercise and **US Earnings (CPS)** case study material have moved to [Week 06: From Data to Report](../week06/index.html).
-:::
+## What you will get from this chapter
 
-:::::: {.hero-section}
-::::: {.container}
-::: {.hero-title}
-Week 00: AI-Assisted Coding Prep
-:::
+- A concrete sense of where AI saves real time on coding tasks.
+- A concrete sense of where it does not, or actively misleads you.
+- Three habits that turn the time savings into actual quality.
 
-::: {.hero-subtitle}
-Boosting coding for data analysis with AI tools
-:::
-:::::
-::::::
+## What changed, and why
 
-------------------------------------------------------------------------
+Most data-analysis code looks similar across projects. Load a CSV. Clean a few columns. Join two tables. Group by something. Plot. Run a regression. Save a figure. The combinations are infinite; the *vocabulary* is small and well-documented.
 
-![](../images/week0_pic.png)
+That vocabulary is everywhere on the internet, which means it is in every frontier model's training data. If you ask a chat AI for *"a pandas snippet that loads `morg-2014.csv`, restricts to ages 18 to 65, and computes mean weekly earnings by sex,"* it produces working code on the first try almost every time. The library calls live in its memory.
 
-## Learning Objectives
+This is not nothing. Five years ago, that snippet took ten minutes of typing, looking up syntax, debugging an off-by-one, and fixing a typo. Now it takes thirty seconds. Multiplied across a project, the difference is real.
 
-By the end of this session, students will:
+## Where AI is genuinely strong
 
--   Understand how AI transforms coding workflows for data analysis tasks
--   Learn effective prompting strategies for data analysis code generation
--   Experience key AI coding tools: ChatGPT Canvas, Claude Projects, GitHub Copilot
--   Practice AI-assisted coding for common data analysis tasks
--   Set up integrated development environments with AI assistance
--   Focus on R and Python. 
+A short list, picked from work in this book.
 
-## Preparation / Before Class
+- **Boilerplate.** Imports, default plot settings, the top of a script.
+- **Standard transformations.** Filter, group, pivot, melt, merge. The pandas lexicon.
+- **Standard models.** OLS with a handful of regressors. A logistic regression. A simple time series. The first time you reach for `statsmodels` or `scikit-learn` on a project, AI gets you there fast.
+- **Translating between dialects.** Pandas to Polars. Python to R when you have to. SQL to pandas.
+- **Reading unfamiliar code.** *"What does this script do?"* — surprisingly good answers, often better than the original developer's comments.
+- **Writing tests.** Generating a small, plausible test for a function you just wrote.
+- **Plot tweaks.** "Add a title in 12pt, move the legend to the bottom, save as 300 dpi PNG." The kind of fiddly request that takes ages to look up and seconds to ask.
 
-::::: {.week-card .card}
-::: card-header
-🔧 **Tool Setup**
-:::
-::: card-body
+## Where AI is not strong (or is actively bad)
 
-**Required Access:** 
+Equally short. Equally important.
 
-- ChatGPT account (free tier sufficient for testing) 
-- Claude account (free tier sufficient)
+- **Anything that depends on knowing your data.** AI does not know your column names, your missing-data conventions, or what your survey weights mean. It will guess. The guess is sometimes right.
+- **Causal reasoning.** A regression coefficient is not "the effect of X on Y" without an identification strategy. AI uses the language anyway. You will need to push back.
+- **Choices that are project-specific.** Which observations to drop. What to use as the unit of analysis. Which version of the question to answer. AI will pick a default; the default is rarely what you want.
+- **Tasks that require running the code and reading the output to know if it worked.** A chat AI does not run anything. Even when it says it does, it sometimes does not. *Run it yourself.*
 
-**Recommended Setup:** 
+## Three habits
 
-- GitHub account for Copilot (free for students) 
-- VSCode, RStudio, or Jupyter Notebook installed 
-- Your preferred data analysis language ready (R/Python)
-- You can you a great deal of this for other languages like SQL, Stata or Julia.
+These are the habits that keep AI useful instead of expensive.
 
-**Optional but Valuable:** 
+**1. Describe the data, not just the task.** *"I have a DataFrame with columns `state`, `age`, `sex`, `earnwke`, `uhours`. `earnwke` is weekly earnings in dollars; `uhours` is usual hours worked per week."* This single paragraph at the top of your prompt prevents most of the bluffing.
 
-- Cursor AI editor (free trial available)
+**2. Ask for one thing at a time.** AI is much better at "load and clean" than "load and clean and analyse and report." Iterate. Each step you can check is a step that does not silently break the next one.
 
-:::
-:::::
+**3. Read what it wrote.** Even when it ran. Especially when it ran. Look for: did it filter the rows you expected? Did it drop or keep missings the way you wanted? Did the column names it used match your file?
 
-## Class Material
+## A worked example
 
-::::: {.week-card .card}
-::: card-header
-🤖 **Why AI + Data Analysis Coding Works (20 min)**
-:::
+You are looking at the gender pay gap in the US Current Population Survey. You have `morg-2014-emp.csv`. You ask:
 
-::: card-body
-**Covers key set of tasks:**
+> *"Load `morg-2014-emp.csv`, restrict to ages 18 to 65 with positive `earnwke` and `uhours`, compute hourly wage as `earnwke / uhours`, and report mean hourly wage by `sex`. Columns are state, age, sex (1=male, 2=female), earnwke, uhours, grade92, occ2012."*
 
--   **Repetitive patterns:** Data analysis has common workflows (load → clean/wrangle → analyze → visualize)
--   **Well-documented libraries:** pandas, scikit-learn, as well as dplyr, ggplot2, are extensively covered in AI training data (had been in use for a while). With updates, it knows more recent libraries from tensorflow to fixest (R)
--   **Clear intentions:** "Create a scatterplot with regression line" is specific enough for good code generation. Well established "good practice"
--   **Iterative nature:** Data analysis involves lots of tweaking and refinement -- chat aspect helpful.
+You get five lines of pandas. You run it. You print the result.
 
-**What AI Excels At:**
+Two means, one for sex 1, one for sex 2. They look reasonable — a couple of dollars apart. *Now you check.* Does the row count after filtering make sense? Print it. Did anyone get assigned to neither category? Print `df.sex.value_counts()` first. Did you mean median, not mean, for an income variable with a right tail? You decide; AI does not.
 
--   Well defined code chunks and setup (libraries, dependencies)
--   Syntax, how exactly do certain coding tasks (such as regex, loops)
--   Standard statistical procedures
--   Data manipulation and cleaning
--   Basic visualization code
+Each of these checks takes ten seconds. They make the difference between a number you would put in a report and a number that happens to be on your screen.
 
-**Human Oversight and Decisions are Needed:**
+## Where AI helps · Where AI bluffs
 
--   Most code
--   Research design decisions
--   Statistical / econometric interpretation
--   Domain-specific logic
--   Finalize question (vs bland suggestions)
--   Quality control and validation
-:::
-:::::
+**Helps.** Boilerplate, standard transformations, plot tweaks, reading unfamiliar code, writing tests, translating between languages.
 
-::::: {.week-card .card}
-::: card-header
-📝 **Effective Prompting for Data Analysis (25 min)**
-:::
+**Bluffs.** Column-name guessing on data it has not seen. Causal language about correlations. "I ran this and it works" without actually having run it. The fix is the same as in [Chapter 0f](00f-three-harnesses.qmd): use the harness that lets you check fast.
 
-::: card-body
-**Model Recommendations:**
+## Keep this with you, not the AI
 
-* ChatGPT 4o / Claude Sonnet 4. works about equally fine. 
+- The shape of the data and what it represents.
+- The boundaries of your sample.
+- The interpretation of every coefficient and every estimate.
+- The decision of when to stop iterating and ship.
 
+## Try this
 
+Pick a script you wrote at some point in the last year. Open a chat AI, paste the script, and ask: *"What is this script doing? Are there any bugs or surprising choices?"*
 
-### Prompting Best Practices
+Read the answer. Notice which parts are right (often: most of them). Notice which parts are confidently wrong (often: anything that depends on the meaning of your variables). That gap is the chapter, lived.
 
-Some ideas to help get the code do what you want, or at least close enough. 
+## AI and me
 
-**Be specific**
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
 
--   **Be specific about libraries:** "Using pandas and seaborn..." vs. "Using R and ggplot2..."
--   **Include data structure:** "DataFrame with columns: date, price, volume"
--   **Specify output format:** "Save as PNG for publication" or "Return as tidy data table" or "give back markedown (latex) text with equations"
+## Where to go next
 
-**Define language, preferences**
-
-- I use R and tidyverse, so unless specified, use that
-- I use Python, and when possible prefer polars to pandas
-- Ask for comments: "Include detailed comments explaining each step"
-
-
-**For frequent tasks, AI will know which library to use in a language**
-
-- **Filter on size<5** -- will do it in Python Pandas as default.  
-- **Scatterplot of sales and employment** -- Will do it seaborn / matplotlib or ggplot in R. 
-
-**Advice include data structure** 
-
-- If possible upload the data
-- if not, upload a small bit of data, like 1/1000 random sample
-- Start with creating a data dictionary (see also [class 3](/week03))
-
-### Example prompts
-
-You can experiment with a vague prompt or being specific. 
-
-**Example Prompt 1: broad**
-
-```         
-"Here is some sales data, summarize regional variation."
-```
-
-vs
-
-**Example Prompt 2: with details**
-
-```         
-"Create Python (R) code using pandas (dplyr) to:
-
-1) Load CSV with columns id, date, sales, region
-2) Filter for 2023 data  
-3) Group by region and calculate mean sales
-4) Create a bar chart with plotnine / ggplot2"
-```
-
-What are the pros and cons of each?
-
-### Some tasks where AI works well
-
-
-*1. Data Cleaning Pipeline
-*2. Exploratory Data Analysis
-*3. Statistical Modeling
-*4. Machine Learning Pipeline
-
-:::
-:::::
-
-
-::::: {.week-card .card}
-::: card-header
-**Creating Graphs exercise (40 min)**
-:::
-
-::: card-body
-
-This exercise has moved to [Week 06: From Data to Report](../week06/index.html). See the full [Creating Graphs walkthrough](/da-knowledge/creating-graphs.html).
-
-:::
-:::::
-
-
-## Setting up tool
-
-::::: {.week-card .card}
-::: card-header
-🛠️ **AI Coding Tools Showcase (30 min)**
-:::
-
-::: card-body
-**ChatGPT Tools:**
-
--   **Canvas:** Collaborative coding environment for iterative development
--   **Advanced Data Analysis:** Upload datasets, generate analysis with code execution
--   **GPT-4.1:** Optimized specifically for coding tasks
-
-**Claude Tools:** 
-
-- **Projects:** Upload full datasets and documentation for context-aware coding 
-- **Artifacts:** Code generation with real-time preview and editing 
-- **Claude 4 Sonnet:** Strong reasoning for complex analytical workflows
-
-**Specialized Coding Tools:** 
-
-- **GitHub Copilot:** Inline code completion integrated into your existing editor 
-- **Cursor AI:** AI-first code editor with context-aware suggestions 
-- **Replit:** Browser-based coding with AI assistance
-
-**Hands-on Demo:** 
-
-- Upload sample dataset to ChatGPT Advanced Data Analysis 
-- Create Claude Project with course data 
-- Compare code generation approaches
-:::
-:::::
-
-
-
-
-::::: {.week-card .card}
-::: card-header
-⚡ **GitHub Copilot Integration (20 min)**
-:::
-
-::: card-body
-**Setup in Different Environments:**
-
-**VSCode:**
-
--   Install GitHub Copilot extension
--   Authenticate with GitHub account
--   Use Ctrl+Space for suggestions, Tab to accept
-
-**Jupyter Notebook:**
-
--   Install via VS Code Jupyter extension or JupyterLab extension
--   Inline suggestions while typing
--   Copilot Chat for longer explanations
-
-**RStudio:**
-
--   Enable GitHub Copilot in Global Options \> Code \> Completion
--   Works with R scripts and R Markdown
--   Suggests tidyverse and base R patterns
-
-**Workflow Best Practices:**
-
--   Write descriptive comments before code blocks
--   Use meaningful variable names to guide suggestions
--   Accept suggestions, then modify as needed
--   Use Copilot Chat for explanations and debugging
-:::
-:::::
-
-
-
-## Discussion Questions
-
-**Reflection:**
-
--   Which AI tool felt most natural for your coding style?
--   Where did AI suggestions surprise you (positively or negatively)?
--   How might this change your typical data analysis workflow?
--   What validation steps would you add when using AI-generated code?
-
-
-## Background, Tools and Resources
-
-**Getting Started:** 
-
-- [GitHub Student Pack](https://education.github.com/pack) -- Free Copilot access 
-- [Cursor AI](https://www.cursor.com/) -- AI-first code editor 
-- [OpenAI Codex Cookbook](https://github.com/openai/openai-cookbook) -- Advanced prompting examples
-
-**Key Insight:** AI coding assistance is most powerful when you understand the underlying concepts. Use AI to accelerate implementation, not replace understanding.
-
-**Next Week:** [Week 1 - LLM Review](../week01/) where we'll explore broader AI concepts for data analysis.
-
-## Some personal comments on AI and this class
-
--   While this class is called week00, it was created last. You may have guessed righ.
--   AI (Claude 4.0) created a great deal of this class following a [detailed prompt](assets/week00-ask-ai). I also asked whether to keep it as week00 or change all numbering. Great answers.
-
+[What an LLM is, in plain words](02-llm-review.qmd) — the model behind the harness. Worth a chapter; not worth a textbook.

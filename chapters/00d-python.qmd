@@ -4,31 +4,128 @@ title: "Your Python environment"
 
 # Your Python environment
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+The book is Python only. This chapter sets the floor: a working interpreter, a way to manage packages, and a way to keep one project's libraries from breaking another's. It is the least exciting chapter in the book and one of the most important.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-The book is Python only. This chapter sets the floor.
+- A Python install that runs the book's scripts.
+- A package manager you can rely on.
+- One small habit — the virtual environment — that will save you a weekend later.
 
-- A working Python 3.11 or newer.
-- A package manager — `uv` is the current recommendation; `pip` plus `venv` is the conservative alternative; Anaconda is fine if you already have it.
-- The handful of libraries the book leans on: `pandas`, `numpy`, `matplotlib`, `seaborn`, `statsmodels`, `requests`, `pydantic`, plus one LLM provider's SDK.
-- Per-project virtual environments — what they are and why we use them.
-- A quick "is your Python alive" check.
+## Pick a Python
 
-## Why this matters for AI work
+You want **Python 3.11 or newer**. Get it from [python.org](https://www.python.org/downloads/) if you have nothing, or from `brew install python` on macOS, or from your system package manager on Linux.
 
-AI assistants are at their best when they can see and run your environment. A clean, reproducible setup is the difference between *"AI fixed my regression"* and *"AI gave me code that runs on its imaginary computer but not yours."*
+Confirm it works:
+
+```
+python --version          # macOS, Linux
+python3 --version         # macOS sometimes
+py --version              # Windows
+```
+
+You should see `Python 3.11.x` or higher. If a `2.7` shows up, your system is old enough to drink in most countries; install a current Python alongside.
+
+## Pick a package manager
+
+A package manager installs and tracks the libraries your code uses. Three reasonable choices:
+
+- **`uv`** — new, fast, well-designed. Recommended for new projects. Install with `pip install uv` (yes, you install it with the thing it replaces) or via [astral.sh/uv](https://docs.astral.sh/uv/).
+- **`pip` plus `venv`** — built into Python. The conservative choice. Universally understood.
+- **Anaconda** — comes with a curated stack of scientific packages. Heavy. Fine if you already have it; not worth installing fresh.
+
+This book's examples assume `uv` or `pip`. The principles transfer.
+
+## The virtual environment habit
+
+Each project gets its own virtual environment. A virtual environment is a folder that contains a Python plus a fresh set of libraries, isolated from everything else on your machine. This sounds boring; it prevents the most common multi-week debugging headaches in scientific Python.
+
+With `uv`:
+
+```
+cd my-project
+uv venv                 # creates .venv/ in this folder
+uv pip install pandas matplotlib statsmodels
+```
+
+With `pip` and `venv`:
+
+```
+cd my-project
+python -m venv .venv
+source .venv/bin/activate     # macOS/Linux
+.venv\Scripts\activate        # Windows
+pip install pandas matplotlib statsmodels
+```
+
+The activation step changes which Python a fresh terminal uses. You will forget it sometimes; you will reactivate. That is normal.
+
+Add `.venv/` to your `.gitignore` (we already did, in [the previous chapter](00c-github.qmd)).
+
+## The libraries this book uses
+
+A short list, installed once per project:
+
+```
+pandas numpy matplotlib seaborn statsmodels
+requests pydantic python-dotenv
+anthropic openai     # one of these, for Part VI
+```
+
+Save the exact list to a file so others can reproduce it:
+
+```
+pip freeze > requirements.txt          # or: uv pip freeze > requirements.txt
+```
+
+Commit `requirements.txt`. Six months from now you will still be able to recreate the environment with `pip install -r requirements.txt`.
+
+## The verify script
+
+Save the following as `verify.py` in any folder. Run it.
+
+```python
+import sys
+import importlib
+
+print(f"Python: {sys.version.split()[0]}")
+for pkg in ["pandas", "numpy", "matplotlib", "statsmodels"]:
+    try:
+        m = importlib.import_module(pkg)
+        v = getattr(m, "__version__", "unknown")
+        print(f"  {pkg:<12} {v}")
+    except ImportError:
+        print(f"  {pkg:<12} NOT INSTALLED")
+```
+
+If the four core packages all print versions, you are ready. If not, install whichever is missing and try again.
 
 ## A note for textbook readers
 
-If you are reading Békés–Kézdi alongside, the textbook's coding appendix walks through the same Python install in more detail. Use that as your primary reference; this chapter is a checklist rather than a tutorial.
+If you are reading [Békés–Kézdi](https://gabors-data-analysis.com/getting-started) alongside, the textbook's coding appendix walks through the same install in more detail and ties it to the textbook's case-study data. That is the better introduction; treat this chapter as the checklist.
 
-## TODO for the author
+## Where AI helps · Where AI bluffs
 
-- A *minimum viable* setup recipe in five lines.
-- One pitfall section: PATH issues on Windows, Apple-Silicon vs. Intel package availability on macOS.
-- A "verify" block: a 10-line script that imports everything the book uses and prints versions.
+**Helps.** Diagnosing a cryptic install error. Translating a `pip` command into a `uv` command. Suggesting a minimal `requirements.txt` for a specific task.
+
+**Bluffs.** Recommending a package version that does not exist. Telling you to `pip install` something that has been renamed. If you get an error like *"could not find version X for package Y,"* that is a real signal — read what `pip` actually offers, do not let the AI guess.
+
+## Keep this with you, not the AI
+
+- The package manager you pick. Pick one and stick with it across your projects.
+- Whether to commit `requirements.txt` (yes, almost always) and what to put in it.
+- The Python version your project targets. Decide once; mention it in your README.
+
+## Try this
+
+In a fresh folder, create a virtual environment, activate it, install `pandas`, run a one-line script that imports pandas and prints its version. Total time: under three minutes. You now have a clean place to work for the next chapter.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+[Your AI account](00e-ai-account.qmd) — the last setup step before we get to the interesting parts.

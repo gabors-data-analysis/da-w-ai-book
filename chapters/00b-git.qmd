@@ -4,27 +4,97 @@ title: "Git for analysts"
 
 # Git for analysts
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+Git is version control. It remembers every saved state of a project so you can roll back, branch off, and share without losing work. You do not need to be an expert. You need a small, reliable set of commands and the mental model behind them.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-Git is the version control most of the analytical world uses. You do not need to be a Git expert. You do need a small, reliable working set of commands.
+- A working mental model of what Git tracks and what it does not.
+- The five commands that cover almost everything you will do.
+- A safety net for when you have made a mess.
 
-- The mental model: a project is a folder; Git remembers every saved state of it.
-- The five commands you use ninety percent of the time: `clone`, `status`, `add`, `commit`, `push`.
-- What a *branch* is, and why we mostly stay on `main`.
-- Reading a `git log` and undoing the last thing without burning the project down.
-- Using Git from the terminal vs. from a GUI (GitHub Desktop). Pick one; both are fine.
+## The mental model in one paragraph
 
-## Why this matters for AI work
+A Git **repository** is a folder Git is watching. As you change files, Git knows what changed. When you tell it to **commit**, it saves a snapshot — a labelled point you can return to. The snapshots line up in a **history**. You can share the history with a remote copy on GitHub by **pushing**, and pull other people's changes back. That is most of it.
 
-When AI agents start writing files into your project, version control stops being a nice-to-have and becomes the only way you can confidently roll back a bad change. A chapter on agentic AI without Git is reckless. So the prerequisite goes here.
+## Five commands
 
-## TODO for the author
+These five cover ninety percent of what you will do in this book.
 
-- A worked example: open a folder, `git init`, make two commits, look at the log.
-- One concrete check: after AI writes a script, `git diff` shows you exactly what changed.
-- A short "if everything goes wrong" recipe (a one-liner to discard local changes and start over).
+```
+git clone <url>      # copy a remote repo to your laptop
+git status           # what's changed since the last commit?
+git add <files>      # mark these changes for the next commit
+git commit -m "..."  # save a snapshot with a one-line message
+git push             # send commits to the remote
+```
+
+The shape of a normal session: edit files, `git status`, `git add`, `git commit -m "Joined hotels and reviews"`, `git push`. That is it.
+
+## A worked example
+
+Imagine you cloned a repo for a class project on the German Bundesliga.
+
+```
+git clone https://github.com/myname/bundesliga-project.git
+cd bundesliga-project
+# … edit a script, generate a chart …
+git status
+# (shows: modified  analysis.py, new file  out/chart_attendance.png)
+git add analysis.py out/chart_attendance.png
+git commit -m "Add attendance trend chart, 2010–2024"
+git push
+```
+
+Five lines of typing. The commit message is the bit that ages well. Future-you (or an instructor) will read these to understand what happened. Write them like a sentence, not like a label.
+
+## Branches, briefly
+
+A **branch** is a parallel line of history. Useful when you want to try something — a different specification, a risky refactor — without disturbing the main line. Most of your work as an analyst will live on a single branch called `main`. The book does not need branches before the capstone.
+
+## When AI agents start writing files
+
+In Part III the book introduces agentic AI — tools that read and write files in your project on your behalf. Version control stops being a nice-to-have and becomes the only way you can confidently roll back a bad change. A common pattern: commit before letting the agent loose, let it work, run `git diff` to see exactly what it touched, then either commit the change or `git restore .` to throw it away.
+
+This is the single biggest reason the book puts Git in Part 0 and not later.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Writing a clear commit message from a `git diff`. Explaining what an unfamiliar Git error means. Suggesting safe ways to undo something.
+
+**Bluffs.** Recommending destructive commands (`git reset --hard`, `git push --force`) without flagging the danger. Mixing up local and remote in its explanations. If a chat AI tells you to run something with `--force`, stop and read why first.
+
+## Keep this with you, not the AI
+
+- What goes into a commit. *You* decide what counts as one logical change. The AI does not know your project's grain.
+- Whether to commit data files. As a rule, do not. Data lives elsewhere; the repo holds code and small results. Decide where the line is for *your* project and stick to it.
+- The text of a commit message. AI can draft one; you should rewrite it to match how you actually think about the change.
+
+## A small safety net
+
+If you have made changes you regret and have not committed them yet, the magic word is `restore`:
+
+```
+git restore .          # throw away all uncommitted changes in this folder
+```
+
+If you have made bad commits but have not pushed them, the magic word is `reset`:
+
+```
+git reset --soft HEAD~1   # undo the last commit but keep the changes
+```
+
+Anything more dramatic than these — pushed to a shared branch, multiple people involved — is worth a moment of thought. Ask, do not guess.
+
+## Try this
+
+Open a terminal in any folder with a few files. Run `git init`. Run `git status`. Run `git add .`. Run `git commit -m "First commit"`. Run `git log`. You should see one entry, with your message. Total time: under a minute. Now you have a working understanding of Git.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+[GitHub for analysts](00c-github.qmd) — putting your local repo on the cloud and using it as the spine of your work.

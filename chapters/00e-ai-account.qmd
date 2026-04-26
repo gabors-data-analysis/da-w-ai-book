@@ -4,27 +4,85 @@ title: "Your AI account: chat, paid, free"
 
 # Your AI account: chat, paid, free
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+You need at least one chat AI account to read the rest of the book. You probably do not need more than one. This chapter helps you pick.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-Before we use AI for serious work we need an account. This is a one-time decision that takes ten minutes.
+- A working sense of which provider to start with.
+- A clear answer to *"do I need to pay?"*.
+- A short note on what each provider does with your prompts.
 
-- The frontier providers in this edition: Anthropic (Claude), OpenAI (ChatGPT), Google (Gemini), Mistral.
-- The free tier vs. the paid tier — what each one is good for.
-- The student angle: many providers and most universities have student programmes; ask before you pay.
-- One model is enough for most of the book. The capstone benefits from access to two so you can compare.
-- Privacy: what each provider does with your prompts on the free tier. (Short answer: assume non-zero exposure on free tiers; check the policy if your data is sensitive.)
+## Three providers, in plain words
 
-## What this chapter will *not* cover
+Three frontier providers matter for this book.
 
-API keys live in a later chapter (Part VI). You do not need them yet. You can do the entire first six parts of the book with a chat-only account.
+- **Anthropic — Claude.** What this edition was written against. Strong on long, careful reasoning and on coding. The CLI agent we use later (Claude Code) is from the same provider.
+- **OpenAI — ChatGPT.** The most widely used chat AI. Strong on coding and quick responses. Slightly different feel; the same kinds of tasks work.
+- **Google — Gemini.** Strong on long documents and on tasks that involve images or audio. Free tier is generous. Slightly weaker on agentic coding work as of writing.
 
-## TODO for the author
+A fourth — **Mistral**, EU-hosted — is worth knowing about for privacy-sensitive work. We mention it in passing.
 
-- A side-by-side of the two main accounts the book uses (Claude Pro, ChatGPT Plus) — features, monthly cost, what changes on the free tier.
-- A "what we use in this book and why" paragraph.
-- Three pitfalls: credits expiring on free tiers, login methods that surprise students, organisation accounts vs. personal.
+For most chapters, **either Claude or ChatGPT will do**. Pick one and stick with it for the first half of the book; you can compare in the second half.
+
+## Free vs. paid
+
+The free tier of any major provider gets you through the early chapters. The paid tier ($20/month at the time of writing for both Claude Pro and ChatGPT Plus) gets you:
+
+- Larger and faster models.
+- Longer context — you can paste a whole codebook in.
+- Higher message limits per day.
+- Access to the agent / code features without random timeouts.
+
+For a serious run through the book, paid for one provider is worth the money. Two months of paid tier costs less than a single textbook.
+
+If you are a verified student, **GitHub's Student Developer Pack** gives you Copilot Pro for free. Copilot is not the same as a chat AI, but for the IDE-based parts of this book it covers a lot. See the [previous chapter](00c-github.qmd).
+
+## What about API access?
+
+API access is a separate account at the same provider, billed by usage rather than by month. You do **not** need it yet. The book uses API access in Part VI for a few chapters and in the capstone. Total spend for a careful student: under ten dollars. We come back to this in [Chapter 25](25-api-keys.qmd).
+
+## What providers do with your prompts
+
+A short, blunt summary, accurate as of this edition.
+
+- **Free tiers.** Assume your prompts may be used for training. If you would not be comfortable with a stranger reading what you typed, do not paste it.
+- **Paid consumer tiers** (Claude Pro, ChatGPT Plus, Gemini Advanced). Stricter, but the policies vary. Read the one for your provider; they are short.
+- **API and enterprise tiers.** Generally, your data is not used for training. If you work with sensitive data, this is the tier you need.
+- **A practical rule for this book.** Do not paste real personal data — survey responses with names, scraped social-media data with usernames — into any AI tool, free or paid. The case studies in the book use simulated or already-public data for exactly this reason.
+
+## Which one *we* use in this book
+
+The chapters are written and tested against:
+
+- **Claude Opus 4.7** for most chapters and for the CLI agent.
+- **ChatGPT 5.5** for cross-checks and for Part VI examples.
+
+You do not need both. Where the two differ in a way that matters, the chapter says so.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Comparing two providers' behaviour on a real task you give it. Summarising a privacy policy.
+
+**Bluffs.** Telling you what its own privacy policy says. Models are trained on documents, not on the operational reality of the company they work for. Read the policy on the provider's website, not from the chat.
+
+## Keep this with you, not the AI
+
+- The provider you pick. It is a meaningful choice and a small commitment.
+- What sensitive data, if any, you are willing to send through which tier.
+- Whether to pay this month, or to live with the free-tier limits a while longer.
+
+## Try this
+
+Sign up for one chat AI account if you do not already have one. Spend ten minutes asking it to do something analytical you have done by hand before — clean a small CSV, write a regression in Python, summarise a paper you know well. Notice where the answer is good. Notice where it is wrong.
+
+Write down what you found. That is your first "AI and me" reflection of the book.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+[Three harnesses](00f-three-harnesses.qmd) — chat, IDE, and CLI. Picking the one (or two) you will use throughout the book.

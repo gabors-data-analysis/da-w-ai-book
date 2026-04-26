@@ -1,180 +1,87 @@
 ---
-title: "What LLMs Are (and Aren't)"
+title: "What an LLM is, in plain words"
 ---
 
-# What LLMs Are (and Aren't)
+# What an LLM is, in plain words
 
-Before you can collaborate with an AI, you need a working mental model of what it is. Not a deep technical one — a *useful* one. Enough to predict where it will be brilliant, where it will hallucinate, and which decisions stay yours.
+You will work with these tools more confidently if you have a working mental model of what they are. Not a deep one. A useful one. Two pages, no maths.
 
-This chapter introduces the core ideas — tokens, context, training, the "jagged frontier" of capabilities, and the *Cyborg vs. Centaur* metaphor for working with AI. By the end you should be able to look at a task and form an opinion, before you prompt, about whether AI will help, hinder, or mislead.
+## What you will get from this chapter
 
-The chapter draws on the original Week 1 material from the course; the practical reflection exercise lives in [Lab 1](../labs/lab-01.qmd).
+- A plain-words description of how a large language model produces text.
+- Three properties that explain most of the AI behaviour you will see in the book.
+- A short vocabulary you will reuse: token, context, training, inference.
 
-::: {.callout-note}
-## For instructors
-This chapter folds in the Week 1 course material. The original page lives at `week01/index.qmd` in the course repository.
-:::
+## The one-paragraph description
 
-::: {.hero-section}
-::: {.container}
-::: {.hero-title}
-Week 01: LLM Review
-:::
-::: {.hero-subtitle}
-Introduction to Large Language Models and their applications in data analysis
-:::
-:::
-:::
+A large language model — an LLM — is a very large neural network trained, on a very large amount of text, to predict the next chunk of text that should follow whatever has come before. That is it. *"What word is most likely to come next?"* Asked over and over, fast. The trick is that, with enough text and enough parameters, the answers stop being chunks of plausible-sounding language and start being chunks of plausible-sounding *thought*. We do not entirely know why. It works.
 
----
+## A few words you will need
 
+A short vocabulary. We will use these throughout the book.
 
-![](../images/week1_pic.png)
+- **Token.** A small piece of text. *"Manchester"* is one token; *"unprecedented"* is two; common short words are one each. The model sees and produces tokens, not words. Pricing and context limits are measured in tokens. A useful rule of thumb: **one token ≈ three quarters of a word in English.**
+- **Context.** The set of tokens the model can see at once when it answers — your prompt, the system instructions, any files you uploaded, your previous turns, sometimes results from tools the model has called. Models have a maximum context size, measured in tokens. Today's frontier models hold roughly 200,000 to 1,000,000 tokens of context, which is to say "a couple of books."
+- **Training.** The process that produced the model in the first place. Training happens once, on huge piles of text. After training, the model's weights are frozen. *Your* prompts do not change the model.
+- **Inference.** What happens when you use the model. The model reads your context and produces tokens, one after another. Inference is what costs money per use.
+- **Cut-off.** The point in time after which the model has not seen any new text. After the cut-off, the model does not know about new events unless you tell it. As of this edition, the cut-offs sit somewhere in 2025; check the documentation for your provider.
 
-## Learning Objectives
+## Three properties that explain a lot
 
-By the end of this session, students will:
+Three things follow from the description above. They explain most of the behaviour you will encounter.
 
-- Understand core concepts of large language models (LLMs)
-- Distinguish between "Cyborg" and "Centaur" approaches to AI collaboration
-- Experience the "jagged frontier" of LLM capabilities through hands-on practice
-- Critically assess capabilities and limitations of AI tools in academic contexts
+**1. The model is a probability distribution, not a database.**
 
-## Preparation / Before Class
+When you ask *"who is the manager of Real Madrid?"*, the model is not looking up an answer. It is producing the most likely continuation of your question, given everything it ever read. If a name appeared a thousand times in its training data alongside *Real Madrid*, it will produce that name. If three names competed and one of them stopped being the answer six months before the cut-off, the model will sometimes give you the old answer.
 
-::: {.week-card .card}
-::: {.card-header}
-📚 **No Required Reading**
-:::
-::: {.card-body}
-**This is Week 1** - come ready to explore and discuss!
+This is why models hallucinate. They are not lying. They are producing what *looks* like the answer.
 
- **Reflection Preparation:**
+**2. It does not know what it does not know.**
 
-- Think about your current experience with AI tools (if any)
-- Consider examples where you've encountered AI in your work/studies
-- Identify one data analysis task you find time-consuming or repetitive
+The model produces tokens. It does not produce a *confidence* alongside them. The same fluent prose that gives you the right answer to a question gives you a wrong answer to a different question. The tone is the same; the content is not. This is the most important property of LLMs to internalise. We come back to it constantly.
 
-**Optional Background:**
+**3. The same prompt gives different answers.**
 
-- Ethan Mollick: "Co-Intelligence: Living and Working with AI" (Chapters 1-2)
-:::
-:::
+There is a sampling step in inference — the model picks the next token from a distribution rather than always picking the single most likely one. This is on purpose; "always pick the most likely token" produces flat, repetitive prose. The cost is that you can ask the same question twice and get two different answers. Sometimes meaningfully different.
 
+For analytical work this is a feature *and* a bug. If two runs disagree on a numerical answer, that is information; you should be more sceptical. If two runs disagree on the *style* of a paragraph, the disagreement is mostly noise.
 
-## Class Material
+## The "jagged frontier"
 
-::: {.week-card .card}
-::: {.card-header}
-📊 **Core LLM Concepts (60 min)**
-:::
-::: {.card-body}
-**[Slideshow: LLM Concepts and Applications](https://gabors-data-analysis.com/courses/da-w-ai-2025/da-w-ai-01-llm-course.html)**
+A useful image. AI's capabilities are not a smooth curve from "easy tasks" to "hard tasks." They are jagged. A task that looks hard to a human (write a small Python script that does ten things) is easy for AI. A task that looks easy (correctly count occurrences of a word in a long document) is sometimes hard. You learn the shape of the jaggedness only by trying. There is no shortcut, and the shape changes between models.
 
-**Key Topics Covered:**
+The book is, in part, a tour of where the frontier sits as of Spring 2026.
 
-- **What are LLMs?** Statistical models predicting next tokens from massive training data
-- **The Transformer Revolution:** How 2017's "Attention is All You Need" changed everything
-- **Context Windows:** why this matters for data analysis
-- **Training Process:** Resources and human feedback
- - **Collaborative Frameworks:** How to integrate human and AI work
+## Centaur and Cyborg, briefly
 
-:::
-:::
+Two metaphors get used a lot for working with AI. **Centaur** — you and the AI take turns; clear handoffs; you do the parts you do best, AI does the parts it does best. **Cyborg** — you and the AI are interleaved at the level of every paragraph and every line of code; the boundary blurs.
 
+Both are real ways to work. The book leans Centaur in the early chapters (you are still learning where to hand off) and Cyborg later (once you have built the taste for what each side is good at). Neither is wrong.
 
-::: {.week-card .card}
-::: {.card-header}
-🔧 **Hands-on: Data search (15 min)**
-:::
-::: {.card-body}
+## Where AI helps · Where AI bluffs
 
-**Example**
+**Helps.** Explaining what a model is doing on a specific prompt. Translating "I want X" into a prompt that has a chance of getting X.
 
-Try this in a chat
+**Bluffs.** Telling you, with great confidence, *why* it produced a particular wrong answer. The model does not have introspective access to its own weights. Ask it to defend an answer and it will produce a fluent defence — of a wrong answer.
 
-```
-Get me an income dataset by planning regions (county) in Connecticut for 2023. Present the results as a table I can copy and edit..
-```
+## Keep this with you, not the AI
 
-* Now try find the actual data and compare. 
-* Try multiple times in different models
-* Try modifying the prompt to be more specific or different
+- The notion that the model does not know what it does not know.
+- The decision to ask the same question twice when the stakes are non-trivial.
+- The notion that the cut-off is a real limit, not a soft one. Recent events are not in the model unless you put them there.
 
+## Try this
 
-:::
-:::
+Open your chat AI. Ask: *"Who is the current chancellor of Germany?"* Note the answer. Open a second tab. Ask the same question. Note the answer. Compare with reality (any reputable news source).
 
+If you get the same answer twice, that is one signal. If you get the right answer twice, that is another. If you get two different answers, you have just experienced property number three live.
 
+## AI and me
 
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
 
-## Discussion Questions
+## Where to go next
 
-**End of Week Reflection:**
-
-1. **Personal AI Experience:** How have you already incorporated AI into your routine? Which model feels most natural to you?
-
-2. **Error Management:** How do you currently deal with AI hallucinations or imperfect answers?  What strategies emerged during the FT graph exercise?
-
-3. **The Jagged Frontier:** What tasks do you expect AI to excel at? Where do you think it will struggle?  Did the visualization exercise match your expectations?
-
-
-## Assignment
-
-::: {.callout-note icon="📝"}
-## Assignment 1: Reproduce the FT Graph
-
-**Due:** Sunday 23.55 before Week 2 (on moodle)
-
-[Full Assignment Details](../assignments/assignment_01.html){.assignment-badge}
-:::
-
-## Background, Tools and Resources
-
-[AI Model Selection Guide](../da-knowledge/which-ai.html)
-
-[Glossary of key terms](../da-knowledge/technical-terms-page.html)
-
-### Academic Integrity and AI use
-
-**Course Philosophy:**
-
-- **AI as Assistant:** Use AI to enhance your capabilities, not replace your thinking
-- **Maintain Authority:** You remain responsible for all outputs and interpretations
-- **Verify Everything:** Always validate AI suggestions, especially statistical claims
-- **Document Usage:** Keep track of how AI helped -- to learn (and for transparency)
-
-**Red Lines:**
-
-- Never submit unverified AI output as your own work
-- Always understand the analysis you're presenting
-- Avoid over-reliance on AI for critical thinking or interpretation (**you be you**)
-
-**The Goal:** 
-
-Become a more capable data analyst who can leverage AI tools effectively while maintaining scientific rigor.
-
-**Next Week:** 
-
-[Week 2 - Data Discovery and Documentation](../week02/) where we'll use AI to understand and document complex datasets.
-
-## Read more
-
-* [Ethan Mollick update on Jagged Frontier](https://www.oneusefulthing.org/p/the-shape-of-ai-jaggedness-bottlenecks)
-
-
-## Some personal comments on AI and this class
-
-* I needed to rewrite, edit the slideshow frequently. Bloody hell, this course material is tricky. (While [Gosset's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) has been around since 1908...)
-* It was an AI (Claude Sonnet 4.0) that suggest to include the last bit on Academic Integrity and red lines. Hahh.
-
-
-## AI and me — chapter reflection
-
-Before moving on, write a short paragraph for each:
-
-1. How did the chapter **support** my mental model of LLMs?
-2. Where did it **fail** me — what is still unclear?
-3. How did it **extend** me — what new question can I now ask that I couldn't before?
-
-The next chapter, [Which AI Should I Use?](03-which-ai.qmd), gets practical: from the open zoo of frontier models, which ones are worth your money and attention?
+[Which AI model should I use?](03-which-ai.qmd) — the practical pick.

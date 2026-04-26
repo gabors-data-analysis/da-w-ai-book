@@ -1,325 +1,102 @@
 ---
-title: "Terminal Basics"
+title: "Terminal basics"
 ---
 
-# Terminal Basics
+# Terminal basics
 
-From here on the work moves out of a chat window and into a terminal. If `cd`, `ls`, and pipes are not yet muscle memory, this chapter gets you there.
+A terminal is a text window into your computer. You type commands; it does things. It is the cheapest, most reliable interface to a working computer ever invented, and the harness for the CLI agent we use in Part III. You do not need to be a power user. You need a small, comfortable working set.
 
-## What is a Terminal?
+## What you will get from this chapter
 
-A **terminal** (also called command line, shell, or console) is a text-based interface to your computer. Instead of clicking icons, you type commands.
+- A terminal you can open in under three seconds.
+- The five commands you will reuse in every project.
+- A clear sense of what *not* to do until you mean it.
 
-Why does this matter for Claude Code? Claude Code runs in the terminal. It reads your files, runs code, and shows results - all through text commands.
+## Open a terminal
 
-**Don't worry:** You don't need to become a terminal expert. Just learn the basics below.
+- **macOS.** *Cmd-Space*, type `terminal`, press *Return*.
+- **Windows.** Open *Windows Terminal* if you have it (Windows 11 ships with it; on Windows 10, install from the Microsoft Store). Otherwise *PowerShell*. Use *Command Prompt* only if neither of the above is available.
+- **Linux.** *Ctrl-Alt-T*, or your distribution's "Terminal" app.
 
-Setup details below were cross-checked against official documentation on **2026-02-17**.
+You will see a blinking cursor next to a *prompt* — usually your username and computer name and a `$` or `>`. That is the AI of the 1970s. It is still here because it works.
 
----
+## Five commands
 
-## Opening the Terminal
-
-::: {.panel-tabset}
-
-### Windows
-
-**Option 1: Command Prompt**
-
-1. Press `Win` key
-2. Type `cmd`
-3. Click "Command Prompt"
-
-**Option 2: PowerShell**
-
-1. Press `Win` key
-2. Type `powershell`
-3. Click "PowerShell"
-
-**Option 3: Windows Terminal (recommended app)**
-
-If you have Windows 11 or installed Windows Terminal:
-
-1. Press `Win` key
-2. Type `terminal`
-3. Click "Terminal"
-
-Use a **PowerShell** tab inside Windows Terminal for the command examples below.
-
-### Mac
-
-**Option 1: Spotlight**
-
-1. Press `Cmd + Space`
-2. Type `terminal`
-3. Press `Enter`
-
-**Option 2: Finder**
-
-1. Open Finder
-2. Go to Applications → Utilities
-3. Double-click "Terminal"
-
-**Tip:** Keep Terminal in your Dock for quick access.
-
-### Linux
-
-**Most distributions:**
-
-- Press `Ctrl + Alt + T`
-
-**Or:** Search for "Terminal" in your applications menu.
-
-:::
-
----
-
-## Essential Commands
-
-These are the only commands you need to know to use Claude Code.
-
-### Where Am I?
-
-Shows your current folder (directory).
-
-::: {.panel-tabset}
-
-### Windows
-```
-cd
-```
-or
-```
-pwd
-```
-(in PowerShell)
-
-### Mac / Linux
-```
-pwd
-```
-
-:::
-
-### List Files
-
-See what's in the current folder.
-
-::: {.panel-tabset}
-
-### Windows
-```
-dir
-```
-or
-```
-ls
-```
-(in PowerShell)
-
-### Mac / Linux
-```
-ls
-```
-
-To see more details:
-```
-ls -la
-```
-
-:::
-
-### Change Folder
-
-Move to a different folder.
-
-::: {.panel-tabset}
-
-### Windows
-```
-cd Documents
-```
-
-Go up one level:
-```
-cd ..
-```
-
-Go to a specific path:
-```
-cd C:\Users\YourName\Documents\project
-```
-
-### Mac / Linux
-```
-cd Documents
-```
-
-Go up one level:
-```
-cd ..
-```
-
-Go to a specific path:
-```
-cd /Users/YourName/Documents/project
-```
-
-Go to home folder:
-```
-cd ~
-```
-
-:::
-
-### Clear the Screen
-
-Clean up the terminal when it gets cluttered.
-
-::: {.panel-tabset}
-
-### Windows
-```
-cls
-```
-
-### Mac / Linux
-```
-clear
-```
-
-:::
-
----
-
-## Paths: Finding Your Files
-
-A **path** is the address of a file or folder on your computer.
-
-### Examples
-
-::: {.panel-tabset}
-
-### Windows
-```
-C:\Users\Anna\Documents\data-project\hotels.csv
-```
-
-Parts:
-- `C:` - the drive
-- `\Users\Anna\Documents\data-project\` - folders
-- `hotels.csv` - the file
-
-### Mac
-```
-/Users/Anna/Documents/data-project/hotels.csv
-```
-
-Parts:
-- `/Users/Anna/Documents/data-project/` - folders
-- `hotels.csv` - the file
-
-### Linux
-```
-/home/anna/Documents/data-project/hotels.csv
-```
-
-Parts:
-- `/home/anna/Documents/data-project/` - folders
-- `hotels.csv` - the file
-
-:::
-
-### Tips for Paths
-
-- **Spaces in names:** Use quotes: `cd "My Documents"`
-- **Tab completion:** Type part of a name and press `Tab` to autocomplete
-- **Drag and drop:** On Mac (and many Windows terminals), you can drag a folder into the terminal to paste its path
-
----
-
-## Starting Claude Code
-
-Once you're in the folder with your data:
+Most of what you will type in the terminal for this book is one of these.
 
 ```
-claude
+pwd          # where am I?
+ls           # what is in this folder?
+cd folder    # move into a folder
+cd ..        # move up one level
+clear        # tidy the screen
 ```
 
-That's it! Claude Code starts and you can begin typing your requests.
+On Windows PowerShell, `pwd` and `ls` work; on plain Command Prompt you would use `cd` (without arguments) and `dir` instead. PowerShell is the path of least resistance for this book.
 
-### Example Workflow
+A typical session: open terminal, `pwd` to see where it dropped you, `cd Documents/projects/my-project`, `ls` to confirm you are where you think you are, run something, `clear` when the screen gets messy.
 
-::: {.panel-tabset}
+## Paths in one paragraph
 
-### Windows (PowerShell)
+A **path** is the address of a file or folder.
+
+- macOS / Linux: `/Users/anna/Documents/dawai/data/hotels.csv`
+- Windows: `C:\Users\Anna\Documents\dawai\data\hotels.csv`
+
+Two shortcuts will save you typing:
+
+- `~` means *your home folder*. `cd ~/Documents` works on macOS and Linux. PowerShell understands `~` too.
+- *Tab completion.* Start typing a folder name and press `Tab`. The shell finishes it for you. Press `Tab` twice to see options.
+
+## Running scripts and tools
+
+The reason any of this matters for the book:
+
 ```
-cd C:\Users\Anna\Documents\austrian-hotels
-claude
+python script.py            # run a Python script
+python -m venv .venv        # make a virtual environment
+pip install pandas          # install a package
+git status                  # ask Git what changed
+claude                      # start the Claude Code CLI agent
 ```
 
-### Mac
-```
-cd ~/Documents/austrian-hotels
-claude
-```
+Each of these is a tool that ships with a name; you call it by typing the name. You will pick up more as you go.
 
-### Linux
-```
-cd ~/Documents/austrian-hotels
-claude
-```
+## Stopping something that is running
 
-:::
+If a command runs forever, **`Ctrl-C`** stops it. Press it. If the program ignores `Ctrl-C`, close the terminal window. Both are fine. Neither breaks anything.
 
----
+## What not to do until you mean it
 
-## Common Issues
+Three commands look harmless and are not. Avoid them until you understand them.
 
-### "Command not found" for `claude`
+- `rm -rf <something>` — deletes a folder and everything in it, no Recycle Bin. Even more so on macOS and Linux. Pause before you type it.
+- `sudo` (macOS / Linux) — runs a command as administrator. Most things in this book do not need it. If a chat AI tells you to `sudo` and you do not know why, ask why first.
+- `git push --force` — already covered in [Git for analysts](00b-git.qmd).
 
-Claude Code isn't installed, or not in your PATH.
+## Where AI helps · Where AI bluffs
 
-**Fix:** Follow the [Claude Code install guide](install-cli.html#claude-code)
+**Helps.** Translating *"I want to count the lines in every CSV in this folder"* into a single shell command. Explaining what an unfamiliar command does. Suggesting safer alternatives.
 
-### "No such file or directory"
+**Bluffs.** Mixing macOS commands with Windows ones in the same answer. Recommending a destructive command without flagging it. Telling you to `rm` something on the basis of a misunderstanding of your folder structure. Read what the AI is asking you to delete; read it twice.
 
-You typed a path that doesn't exist.
+## Keep this with you, not the AI
 
-**Fix:**
-1. Use `ls` (or `dir`) to see what's actually in your folder
-2. Check spelling
-3. Use Tab completion
+- The decision to run a command, especially one with `rm`, `sudo`, or `--force` in it. AI advises; you press Enter.
+- The path you are operating in. *"Run this in your project folder"* assumes you know which folder that is. Look at `pwd` before you act.
 
-### "Permission denied"
+## Try this
 
-You don't have access to that folder/file.
+Open a terminal. Run `pwd`, `ls`, then `cd ~`, then `pwd` again. You should see your home folder. `cd` back into a project folder you care about. Confirm `ls` shows what you expect. Total time: under a minute.
 
-**Fix:**
-- Work in your own folder first (for example, `~/Documents` on Mac/Linux or `%USERPROFILE%\Documents` on Windows)
-- Use `sudo` (Mac/Linux) or Administrator mode (Windows) only when a setup/install step explicitly requires elevated permissions
-- Avoid running everyday project commands as admin/root unless you know the command needs it
+If you got that far, the terminal is no longer the obstacle. The CLI agent in Part III will live here.
 
----
+## AI and me
 
-## Quick Reference Card
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
 
-| Task | Windows | Mac / Linux |
-|------|---------|-------------|
-| Open terminal | `Win` → type `terminal` (or `powershell`) | `Cmd+Space` → type `terminal` |
-| Where am I? | `cd` or `pwd` (PowerShell) | `pwd` |
-| List files | `dir` or `ls` (PowerShell) | `ls` |
-| Change folder | `cd foldername` | `cd foldername` |
-| Go up | `cd ..` | `cd ..` |
-| Clear screen | `cls` | `clear` |
-| Start Claude | `claude` | `claude` |
-| Exit Claude | type `exit` or `/exit` | type `exit` or `/exit` |
+## Where to go next
 
----
-
-## You're Ready!
-
-That's all you need. The terminal might feel unfamiliar at first, but after using it a few times with Claude Code, it becomes natural.
-
-**Next step:** [Install Claude Code](install-cli.html#claude-code)
-
+[VS Code and Copilot](13-vscode-copilot.qmd) for the IDE harness, or [Installing a CLI agent](12-install-cli.qmd) for the CLI harness. You do not need both today.

@@ -21,42 +21,43 @@ book:
     - how-to-use.qmd
     - versions.qmd                           # Edition + model snapshot
 
-    - part: "Part 0 — Set up your tools"
+    - part: "Part 0 — Tools and harnesses"
       chapters:
-        - chapters/00a-prep.qmd              # PLACEHOLDER: what you need before you start
-        - chapters/00b-git.qmd               # PLACEHOLDER: git for analysts
-        - chapters/00c-github.qmd            # PLACEHOLDER: GitHub for analysts
-        - chapters/00d-python.qmd            # PLACEHOLDER: your Python environment
-        - chapters/00e-ai-account.qmd        # PLACEHOLDER: chat AI account, paid vs free
+        - chapters/00a-prep.qmd              # what you need before you start
+        - chapters/00b-git.qmd               # git for analysts
+        - chapters/00c-github.qmd            # GitHub for analysts
+        - chapters/00d-python.qmd            # Python environment
+        - chapters/00e-ai-account.qmd        # your chat AI account
+        - chapters/00f-three-harnesses.qmd   # chat / IDE / CLI overview
+        - chapters/11-terminal-basics.qmd    # terminal basics (moved from old Part III)
+        - chapters/13-vscode-copilot.qmd     # VS Code + Copilot (moved)
+        - chapters/12-install-cli.qmd        # installing a CLI agent (moved)
 
     - part: "Part I — What an LLM is, and what it isn't"
       chapters:
-        - chapters/01-ai-for-coding.qmd      # source: week00 (to be rewritten via SKILL)
-        - chapters/02-llm-review.qmd         # source: week01 (to be rewritten via SKILL)
-        - chapters/03-which-ai.qmd           # source: da-knowledge/which-ai
-        - chapters/04-glossary.qmd           # source: da-knowledge/technical-terms-page
-        - chapters/04a-prompting-basics.qmd  # PLACEHOLDER
-        - chapters/04b-where-ai-fails.qmd    # PLACEHOLDER: hallucinations + how to catch them
+        - chapters/01-ai-for-coding.qmd      # AI for coding work
+        - chapters/02-llm-review.qmd         # what an LLM is, in plain words
+        - chapters/03-which-ai.qmd           # which model, on a student budget
+        - chapters/04-glossary.qmd           # glossary
+        - chapters/04a-prompting-basics.qmd  # prompting basics
+        - chapters/04b-where-ai-fails.qmd    # where AI fails — a field guide
 
-    - part: "Part II — Working with AI in Chat"
+    - part: "Part II — Working with AI: data foundations"
       chapters:
-        - chapters/05-documenting.qmd        # source: week02
-        - chapters/06-doc-fundamentals.qmd   # source: da-knowledge/documentation-readme
-        - chapters/07-joining-tables.qmd     # source: da-knowledge/joining-tables
-        - chapters/08-reports.qmd            # source: week03
-        - chapters/09-ideas-good-report.qmd  # source: week03/ideas-good-report
-        - chapters/10-creating-graphs.qmd    # source: da-knowledge/creating-graphs
+        - chapters/05-documenting.qmd        # documenting code and data
+        - chapters/06-doc-fundamentals.qmd   # documentation fundamentals
+        - chapters/07-joining-tables.qmd     # joining tables
+        - chapters/08-reports.qmd            # writing reports
+        - chapters/09-ideas-good-report.qmd  # ideas for a good report
+        - chapters/10-creating-graphs.qmd    # creating graphs
 
-    - part: "Part III — From Chat to CLI: Agentic Workflows"
+    - part: "Part III — Working at scale: agents and pipelines"
       chapters:
-        - chapters/11-terminal-basics.qmd    # source: da-knowledge/terminal-basics
-        - chapters/12-install-cli.qmd        # source: da-knowledge/install-cli
-        - chapters/13-vscode-copilot.qmd     # source: da-knowledge/vscode-setup
-        - chapters/14-agentic-cli.qmd        # source: week04
-        - chapters/15-advanced-cli.qmd       # source: week05
-        - chapters/16-data-to-report.qmd     # source: week06
-        - chapters/17-designing-projects.qmd # source: da-knowledge/designing-projects
-        - chapters/18-reproducible.qmd       # source: da-knowledge/reproducible-research
+        - chapters/14-agentic-cli.qmd        # agentic AI in practice
+        - chapters/15-advanced-cli.qmd       # advanced agent workflows
+        - chapters/16-data-to-report.qmd     # end-to-end: data to report
+        - chapters/17-designing-projects.qmd # designing larger projects
+        - chapters/18-reproducible.qmd       # reproducible research pipelines
 
     - part: "Part IV — Text as Data"
       chapters:

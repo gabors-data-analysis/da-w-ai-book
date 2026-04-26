@@ -4,27 +4,107 @@ title: "GitHub for analysts"
 
 # GitHub for analysts
 
-::: {.callout-warning}
-## Placeholder chapter
-Stub. To be drafted via the chapter-writing skill.
-:::
+GitHub is a website that hosts Git repositories and adds a layer of collaboration tools on top. For an analyst it does three useful things — cloud backup, sharing, and (eventually) automation. You can ignore most of GitHub for most of this book. You cannot ignore all of it.
 
-## What this chapter will cover
+## What you will get from this chapter
 
-GitHub is a website that hosts Git projects and adds a layer of collaboration tools on top. For an analyst it does three useful things: cloud backup, sharing, and (eventually) automated workflows.
+- An account, a first repository, and a pushed commit.
+- A sense of what to commit and what not to commit.
+- One free benefit if you are a verified student that you should claim now.
 
-- Creating a repository for your work.
-- Pushing a local folder to a GitHub repo.
-- Reading a project on GitHub: README, file tree, commit history, issues.
-- The student benefits — free private repos and free Copilot Pro for verified students.
-- A taste of GitHub Actions: how a `.yml` file in `.github/workflows/` can render a website on every push. (This very book deploys that way.)
+## The account
 
-## Why this matters for AI work
+Sign up at [github.com](https://github.com) with your university email if you have one. Verify it. That is it.
 
-The capstone project at the end of the book is graded partly on reproducibility — can someone clone your repo and rerun your analysis? GitHub is how you make that question answerable.
+## The first repo
 
-## TODO for the author
+You can create a repository on GitHub's website (`+ → New repository`), or you can create one locally and push it. Either works. The cleanest first run-through:
 
-- Walk through pushing a one-file repo from scratch.
-- A short note on what *not* to commit: data files larger than a few MB, anything containing an API key, anything containing student personal data.
-- A two-paragraph aside on `.gitignore` with a starter file the reader can copy.
+```
+# create the repo on github.com — name it, leave it empty
+# then in your local folder
+git init
+git add .
+git commit -m "First commit"
+git branch -M main
+git remote add origin https://github.com/<your-username>/<your-repo>.git
+git push -u origin main
+```
+
+Refresh the GitHub page; your files are there.
+
+## Reading a project on GitHub
+
+When you land on a repository, four things matter:
+
+- The **README** — the front page. Tells you what the project is and how to run it.
+- The **file tree** — what is in the repo.
+- The **commit history** — recent changes, with their messages. A surprisingly good way to see what someone has been working on.
+- **Issues** — a public list of bugs, ideas, and questions. Worth using even on a solo project as a to-do list.
+
+A good README is the difference between *"a stranger can use this in twenty minutes"* and *"a stranger gives up in five."* Chapter 6 covers what to put in one.
+
+## What not to commit
+
+Three categories. Be strict.
+
+1. **Data files larger than a few megabytes.** Git is slow with large files. GitHub limits individual files to 100 MB and complains long before that. Keep raw data outside the repo, or in cloud storage your scripts download from.
+2. **Anything containing an API key, password, or token.** Once it is in a public repo, even briefly, treat it as compromised and rotate it. Tools like `git-secrets` exist; the cheapest defence is a `.gitignore` that excludes a `.env` file.
+3. **Personal data of other people.** Survey responses with identifiers, scraped social-media data with usernames, anything covered by privacy law in your country. If in doubt, do not commit.
+
+## A starter `.gitignore`
+
+Put this in the root of every project:
+
+```
+# environments and secrets
+.env
+*.pyc
+__pycache__/
+.venv/
+venv/
+
+# data — keep raw + intermediate out of git
+/data/raw/
+/data/clean/
+
+# notebooks' messy outputs
+.ipynb_checkpoints/
+
+# editor and OS junk
+.DS_Store
+.vscode/
+.idea/
+```
+
+Adjust as you go. Anything you would be embarrassed for the world to see should be in here on day one.
+
+## The student benefit worth claiming
+
+If you have a `.edu` email or can verify student status, GitHub gives you the **Student Developer Pack**: free GitHub Pro, free Copilot Pro (the AI autocomplete that lives inside VS Code), and credits for a handful of other services. Apply at [education.github.com](https://education.github.com). The Copilot upgrade alone is worth your ten-minute application.
+
+## Where AI helps · Where AI bluffs
+
+**Helps.** Drafting a README from a folder of code. Explaining what a workflow file in `.github/workflows/` does. Generating a starter `.gitignore` for a specific stack.
+
+**Bluffs.** Confidently telling you a GitHub UI button is in a place it is not — UIs change every quarter; AI does not always know. If a chat AI tells you to "click Settings → Pages → Source" and you cannot find the button, look around the page; do not assume the AI is right.
+
+## Keep this with you, not the AI
+
+- What is public and what is private. The decision to make a repo public is yours and effectively permanent — once code is online, even a delete does not unindex it everywhere.
+- What goes in a README. A good README reflects your understanding of the project. Outsource the formatting; keep the content.
+- The commit-message style across your projects. Your future self will read these. AI does not read them.
+
+## Try this
+
+Create a repository called `dawai-scratch` on GitHub. Clone it locally. Create one file called `notes.md` with two lines of text. Commit. Push. Refresh GitHub and confirm the file is there. Total time: five minutes. You now have a working pipe between your laptop and the web.
+
+## AI and me
+
+1. How did AI **support** me here?
+2. How did AI **fail** me?
+3. How did AI **extend** me?
+
+## Where to go next
+
+[Your Python environment](00d-python.qmd) — getting Python to a state where the rest of the book runs.
