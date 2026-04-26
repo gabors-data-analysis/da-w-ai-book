@@ -1,0 +1,30 @@
+---
+title: "Your AI account: chat, paid, free"
+---
+
+# Your AI account: chat, paid, free
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+Before we use AI for serious work we need an account. This is a one-time decision that takes ten minutes.
+
+- The frontier providers in this edition: Anthropic (Claude), OpenAI (ChatGPT), Google (Gemini), Mistral.
+- The free tier vs. the paid tier — what each one is good for.
+- The student angle: many providers and most universities have student programmes; ask before you pay.
+- One model is enough for most of the book. The capstone benefits from access to two so you can compare.
+- Privacy: what each provider does with your prompts on the free tier. (Short answer: assume non-zero exposure on free tiers; check the policy if your data is sensitive.)
+
+## What this chapter will *not* cover
+
+API keys live in a later chapter (Part VI). You do not need them yet. You can do the entire first six parts of the book with a chat-only account.
+
+## TODO for the author
+
+- A side-by-side of the two main accounts the book uses (Claude Pro, ChatGPT Plus) — features, monthly cost, what changes on the free tier.
+- A "what we use in this book and why" paragraph.
+- Three pitfalls: credits expiring on free tiers, login methods that surprise students, organisation accounts vs. personal.

@@ -1,0 +1,31 @@
+---
+title: "Working honestly with AI"
+---
+
+# Working honestly with AI
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+A practical chapter on academic integrity, attribution, and disclosure. Not a lecture; a working guide.
+
+- The course rule, recapped: use AI as your assistant, not your ghostwriter. You must be able to defend every line.
+- What goes in a method section when AI helped: which model, which prompts (in spirit, not verbatim), what AI did, what you did, what you checked.
+- What goes in a citation when AI is a real input — the current consensus is forming; we summarise the cleanest versions (APA, Chicago, journal-specific notes).
+- The difference between *AI helped me write the paragraph* and *AI wrote the paragraph and I pasted it*. Both happen; only one is acceptable in academic work.
+- Group projects: how to keep the line clear when one teammate over-delegates.
+- A short, honest section on what your instructors are likely to detect and how.
+
+## Why this chapter is here, near the end
+
+You need to have used AI seriously before the integrity questions become real. By Part IX you have done seven parts of work; the rules now have something to stick to.
+
+## TODO for the author
+
+- A model paragraph: "AI use" disclosure for a project methods section.
+- One para on the difference between *transparency about tooling* (good, expected) and *attribution of authorship* (different question, narrower).
+- A note on AI-generated images, AI-generated code comments, and other places where attribution slips through the cracks.

@@ -1,0 +1,30 @@
+---
+title: "GitHub for analysts"
+---
+
+# GitHub for analysts
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+GitHub is a website that hosts Git projects and adds a layer of collaboration tools on top. For an analyst it does three useful things: cloud backup, sharing, and (eventually) automated workflows.
+
+- Creating a repository for your work.
+- Pushing a local folder to a GitHub repo.
+- Reading a project on GitHub: README, file tree, commit history, issues.
+- The student benefits — free private repos and free Copilot Pro for verified students.
+- A taste of GitHub Actions: how a `.yml` file in `.github/workflows/` can render a website on every push. (This very book deploys that way.)
+
+## Why this matters for AI work
+
+The capstone project at the end of the book is graded partly on reproducibility — can someone clone your repo and rerun your analysis? GitHub is how you make that question answerable.
+
+## TODO for the author
+
+- Walk through pushing a one-file repo from scratch.
+- A short note on what *not* to commit: data files larger than a few MB, anything containing an API key, anything containing student personal data.
+- A two-paragraph aside on `.gitignore` with a starter file the reader can copy.

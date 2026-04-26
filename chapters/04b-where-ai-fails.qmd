@@ -1,0 +1,33 @@
+---
+title: "Where AI fails — a field guide"
+---
+
+# Where AI fails — a field guide
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+The preface gave the headlines on where AI bluffs. This chapter is the field guide: a taxonomy of the specific failure modes you will meet, with a one-line diagnostic for each.
+
+- **Hallucinated facts** — citations to papers that don't exist, statistics that look right and aren't, function names from libraries that don't have them.
+- **Confidently wrong code** — code that runs and gives a plausible answer to a different question than the one you asked.
+- **Silent data loss** — joins that drop rows, filters that keep too many, sample restrictions applied to one half of a script and not the other.
+- **Causal-sounding correlation** — a regression coefficient described as an "effect" when nothing in the design supports a causal reading.
+- **Stale knowledge** — APIs, library versions, regulations, sports results. Anything that moved after the model's training cut-off.
+- **Audience drift** — the report drifts toward a generic data-science blog tone instead of the specific reader you have.
+
+For each, one diagnostic the reader can apply in under a minute.
+
+## Where this chapter fits
+
+Closes Part I. After this, the reader should be able to read AI output sceptically without reading it cynically.
+
+## TODO for the author
+
+- One real example per failure mode. Real outputs, names anonymised where needed.
+- A "diagnostic ladder": cheapest check first, more expensive checks only if the cheap ones flag a problem.
+- A note that the failure modes evolve with the models. Date everything.

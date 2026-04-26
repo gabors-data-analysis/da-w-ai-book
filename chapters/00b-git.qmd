@@ -1,0 +1,30 @@
+---
+title: "Git for analysts"
+---
+
+# Git for analysts
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+Git is the version control most of the analytical world uses. You do not need to be a Git expert. You do need a small, reliable working set of commands.
+
+- The mental model: a project is a folder; Git remembers every saved state of it.
+- The five commands you use ninety percent of the time: `clone`, `status`, `add`, `commit`, `push`.
+- What a *branch* is, and why we mostly stay on `main`.
+- Reading a `git log` and undoing the last thing without burning the project down.
+- Using Git from the terminal vs. from a GUI (GitHub Desktop). Pick one; both are fine.
+
+## Why this matters for AI work
+
+When AI agents start writing files into your project, version control stops being a nice-to-have and becomes the only way you can confidently roll back a bad change. A chapter on agentic AI without Git is reckless. So the prerequisite goes here.
+
+## TODO for the author
+
+- A worked example: open a folder, `git init`, make two commits, look at the log.
+- One concrete check: after AI writes a script, `git diff` shows you exactly what changed.
+- A short "if everything goes wrong" recipe (a one-liner to discard local changes and start over).

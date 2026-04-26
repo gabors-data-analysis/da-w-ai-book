@@ -1,0 +1,34 @@
+---
+title: "Your Python environment"
+---
+
+# Your Python environment
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+The book is Python only. This chapter sets the floor.
+
+- A working Python 3.11 or newer.
+- A package manager — `uv` is the current recommendation; `pip` plus `venv` is the conservative alternative; Anaconda is fine if you already have it.
+- The handful of libraries the book leans on: `pandas`, `numpy`, `matplotlib`, `seaborn`, `statsmodels`, `requests`, `pydantic`, plus one LLM provider's SDK.
+- Per-project virtual environments — what they are and why we use them.
+- A quick "is your Python alive" check.
+
+## Why this matters for AI work
+
+AI assistants are at their best when they can see and run your environment. A clean, reproducible setup is the difference between *"AI fixed my regression"* and *"AI gave me code that runs on its imaginary computer but not yours."*
+
+## A note for textbook readers
+
+If you are reading Békés–Kézdi alongside, the textbook's coding appendix walks through the same Python install in more detail. Use that as your primary reference; this chapter is a checklist rather than a tutorial.
+
+## TODO for the author
+
+- A *minimum viable* setup recipe in five lines.
+- One pitfall section: PATH issues on Windows, Apple-Silicon vs. Intel package availability on macOS.
+- A "verify" block: a 10-line script that imports everything the book uses and prints versions.

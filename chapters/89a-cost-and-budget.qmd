@@ -1,0 +1,31 @@
+---
+title: "Cost and budget"
+---
+
+# Cost and budget
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+A short, practical chapter on staying out of trouble with AI bills. Aimed at the student-budget reader.
+
+- The price model, in one paragraph: most APIs charge by the *token* (a chunk of text, roughly three-quarters of a word). Input and output are priced separately. Smaller models cost ten to twenty times less than the flagship ones.
+- A budget for the whole book: under ten US dollars in API spend for a careful student doing every lab and the capstone.
+- The two ways to overspend without realising: long context windows on a flagship model, and runaway loops in code that doesn't bail out on errors.
+- Two safety nets: spending limits in the provider's console, and a hard `max_tokens` on every API call.
+- When the smaller model is fine — most of the time, for tagging, classification, and short summaries.
+- When the bigger model earns its keep — long-context reasoning, code generation across many files, the few prompts where quality really moves with model size.
+
+## Where this chapter fits
+
+Closes Part IX, alongside academic integrity. Both are "working honestly" — one with your reader, one with your wallet.
+
+## TODO for the author
+
+- A worked example: the capstone's text-to-expectations pipeline, costed out at flagship vs. small-model prices.
+- One screenshot-free walkthrough of setting a hard spending limit on each major provider.
+- A "first thing to do when the bill is bigger than you expected" recipe.

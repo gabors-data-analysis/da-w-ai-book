@@ -1,38 +1,75 @@
 # Data Analysis with AI — book
 
-A **Quarto book** for social science students who already know some Python and some econometrics, and now want to make AI a daily collaborator without losing their judgement.
+A **standalone Quarto book** for late-undergraduate and first-year postgraduate students in economics, finance, business, analytics, and PPE who already know some Python and some econometrics, and now want to make AI a daily collaborator without losing their judgement.
 
-This is the book companion to the open course **Doing Data Analysis with AI**, taught at CEU in Vienna. The course-website version lives at [github.com/gabors-data-analysis/da-w-ai](https://github.com/gabors-data-analysis/da-w-ai); this repo is the linear-narrative book derived from the same material.
+This is not a companion website. It is a book. The course at [github.com/gabors-data-analysis/da-w-ai](https://github.com/gabors-data-analysis/da-w-ai) is the live-class form of the same material; this repo is the linear-narrative book derived from it. The two evolve in parallel.
 
 - **Edition:** Spring 2026, 26 April 2026
 - **Models referenced:** Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, ChatGPT 5.5
+- **Companion textbook:** [Békés & Kézdi, *Data Analysis for Business, Economics, and Policy*](https://gabors-data-analysis.com/getting-started) (Cambridge UP, 2021) — read alongside or before
 - **License:** [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 - **Author:** [Gábor Békés](https://sites.google.com/site/bekesg/), CEU
+- **Live site:** https://gabors-data-analysis.com/da-w-ai-book/
 
-## What's here
+## Who the book is for
+
+- Second- or third-year undergraduates in economics, finance, business, analytics, or PPE.
+- First-year MA / MSc students in any of the above.
+- Readers who have done one solid data-analysis or econometrics course (Békés–Kézdi or equivalent) and have working Python.
+- Readers comfortable enough with a chat AI to have used it casually, but who have not yet used it inside an analytical workflow they would defend.
+
+We do not assume Git, GitHub, terminal use, an IDE, or API experience. **Part 0** covers all of that.
+
+## What's in the book
 
 ```
 da-w-ai-book/
-├── _quarto.yml          # book project: TOC, parts, HTML format
-├── index.qmd            # Preface
-├── how-to-use.qmd       # How to read the book; book/labs split
+├── _quarto.yml          # book project + TOC
+├── index.qmd            # Preface (4–5 page standalone essay)
+├── how-to-use.qmd       # How to read it; chapter shape; book + labs split
 ├── versions.qmd         # Edition + model snapshot (refresh each spring)
-├── linear-plan.qmd      # Editorial rationale + week→chapter mapping
-├── custom.scss          # Site styling (Viridis palette, hero blocks, week cards)
-├── images/              # Figures referenced by chapters
-├── chapters/            # 35 chapter files in 7 narrative parts
-│   ├── 01-ai-for-coding.qmd … 34-capstone-did.qmd
-│   ├── 90-case-studies.qmd
-│   ├── 91-beyond.qmd
-│   └── A1-rights-thanks.qmd
-├── labs/                # 10 stripped-down hands-on labs (no Lab 9 in source)
-│   ├── index.qmd
-│   └── lab-01.qmd … lab-10.qmd
+├── chapter-template.qmd # The chapter skeleton specification
+├── linear-plan.qmd      # Editorial rationale + open follow-ups
+├── custom.scss          # Styling
+├── images/              # Legacy figures from the live course; being phased out
+├── chapters/            # Numbered chapters across nine parts + reference + appendix
+├── labs/                # Stripped-down labs that mirror the original assignments
 └── .github/workflows/
     └── publish.yml      # render + deploy to gh-pages on every push to main
 ```
 
-The book is structured in eight parts plus a Reference section and an appendix. See [`_quarto.yml`](_quarto.yml) for the full TOC and [`linear-plan.qmd`](linear-plan.qmd) for the editorial rationale.
+The book has **eight narrative parts plus front and back matter**:
+
+| Part | Focus |
+|---|---|
+| Front matter | Preface, How to use, Edition + model snapshot |
+| **Part 0** | Set up your tools — git, GitHub, Python, AI account |
+| **Part I** | What an LLM is, and what it isn't |
+| **Part II** | Working with AI in chat |
+| **Part III** | From chat to CLI — agentic workflows |
+| **Part IV** | Text as data |
+| **Part V** | AI in empirical research — controls, IV |
+| **Part VI** | APIs and automation |
+| **Part VII** | Capstone — Manager Impact in Football |
+| **Part VIII** | Labs — work on your own |
+| **Part IX** | Working honestly — academic integrity, cost and budget |
+| Reference | Case studies, where to go from here, the linear plan |
+| Appendix | Rights, acknowledgements, thanks |
+
+Many chapters are currently inlined source content from the live course, slated for rewrite to the chapter template. Part 0, parts of Part I, and Part IX are placeholder stubs awaiting their first draft.
+
+## Editorial decisions (locked for Spring 2026)
+
+- **Standalone book**, not a companion website. Each chapter is self-contained on the page.
+- **No pictures by default.** Diagrams only when prose cannot do the job; no screenshots.
+- **Python only.** Principles transfer to R, Stata, Julia; the code does not.
+- **Claude Code as the CLI agent.** Cursor / Codex / Aider get one-paragraph mentions.
+- **Web-first delivery, single edition per spring.** Print is a future editor's job from a frozen snapshot.
+- **Variable chapter length.** 1–2 pages for a single idea; 4–5 sparingly for an end-to-end walkthrough. No artificial uniformity.
+- **One chapter template, two flavours** (Learn / Practice). Same skeleton; weights move. See [chapter-template.qmd](chapter-template.qmd).
+- **Brief econometrics + textbook redirect.** Methods are pointed at Békés–Kézdi rather than re-derived.
+
+Rationale lives in [linear-plan.qmd](linear-plan.qmd).
 
 ## Build locally
 
@@ -41,53 +78,27 @@ quarto preview        # live preview, HTML
 quarto render         # full HTML render → _book/
 ```
 
-Requires [Quarto](https://quarto.org/docs/get-started/) ≥ 1.4 and Python (only if you plan to execute code chunks).
+Requires [Quarto](https://quarto.org/docs/get-started/) ≥ 1.4 and Python (only if you plan to execute code chunks). RStudio / VS Code / a plain terminal all work.
 
 ## Deploy
 
-`.github/workflows/publish.yml` renders the book on every push to `main` and publishes the result to the `gh-pages` branch via [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages).
+`.github/workflows/publish.yml` renders the book on every push to `main` and publishes to the `gh-pages` branch via [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages). The site is served at https://gabors-data-analysis.com/da-w-ai-book/ via the org's Pages custom domain.
 
-**One-time GitHub setup after the first push lands:**
+## Open follow-ups
 
-1. Repo → **Settings** → **Pages**.
-2. Under **Build and deployment** → **Source**, choose **Deploy from a branch**.
-3. **Branch:** `gh-pages` · **Folder:** `/ (root)` → **Save**.
-4. The book will go live at `https://gabors-data-analysis.github.io/da-w-ai-book/` within a minute or two.
+Tracked in [linear-plan.qmd](linear-plan.qmd):
 
-The first push to `main` triggers the first render and creates the `gh-pages` branch automatically.
-
-## Editorial decisions (locked for Spring 2026)
-
-- **Python only.** No R, no side-by-side. Principles transfer; the code in this edition does not.
-- **Claude Code as the CLI agent.** Cursor / Codex / Aider get one-paragraph mentions where they differ usefully.
-- **Web-first.** A print edition is the print editor's problem from a frozen snapshot.
-- **Yearly spring edition.** Model snapshot in [`versions.qmd`](versions.qmd). Errata between editions go in the issue tracker.
-- **Econometrics: brief + redirect.** Where the book brushes against DiD/IV/etc., we cover the *workflow* and point readers at [*Data Analysis for Business, Economics, and Policy* (Békés & Kézdi, 2021)](https://gabors-data-analysis.com/getting-started) for the method.
-- **Many short chapters** over few long ones. Prefer splitting over merging as content fleshes out.
-
-See [`linear-plan.qmd`](linear-plan.qmd) for the rationale behind each.
-
-## Known issues in this draft
-
-These are open follow-ups, not blockers for the first deploy:
-
-1. **Internal links still point to the website.** Many inlined chapter sections reference the course's URL structure (`/da-knowledge/which-ai.html`, `../week08/index.qmd`, `/case-studies/...`). In the book they should resolve to chapter anchors. Needs a one-pass `sed` once the structure stabilises.
-2. **Hero blocks at chapter starts.** The `::: {.hero-section}` divs inherited from the course pages are visually heavy at the top of every chapter. Trim or restyle in a later pass.
-3. **Doubled chapter heading on some pages.** A chapter with both a wrapper `# Title` and an inlined `# Title` from the source can render two H1s. Visible on a few chapters; cosmetic.
-4. **Image paths assume `images/` at repo root** — handled in this repo (we copy `da-w-ai/images/`). If image filenames change in the source course, they need to be re-synced here.
-5. **Lab 9 is intentionally absent** — there is no `assignment_09.qmd` in the source.
-6. **Some inlined sources still mention R.** Python-only is the editorial intent; the next pass strips the R snippets that survived the migration.
-
-## Relationship to the course repo
-
-- **Source of truth for the website:** [`gabors-data-analysis/da-w-ai`](https://github.com/gabors-data-analysis/da-w-ai). The course's weekly modules, knowledge-base pages, assignments, and case studies all live there.
-- **Source of truth for the book:** this repo.
-- **Sync rhythm:** annual, in spring. Each spring, walk through the course material, port what's changed into the book, refresh the model snapshot in [`versions.qmd`](versions.qmd), tag a release.
+1. Per-chapter rewrite via the writing skill (the chapter-template specification).
+2. Internal-link audit (course-website paths still appear in inlined content).
+3. Strip remaining R snippets — Python only.
+4. Drop the `images/` folder once references are gone.
+5. Fill the placeholder chapters in Parts 0, I, and IX.
+6. Final image-free pass.
 
 ## Contributing
 
-Open an issue or PR. For typo-level errata, a PR is fastest. For structural suggestions or curriculum debates, an issue is better.
+Open an issue or PR against this repo. For typo-level errata, a PR is fastest. For structural suggestions or curriculum debates, an issue is better.
 
 ## Acknowledgements
 
-See [`chapters/A1-rights-thanks.qmd`](chapters/A1-rights-thanks.qmd) for the full acknowledgements.
+See [`chapters/A1-rights-thanks.qmd`](chapters/A1-rights-thanks.qmd).

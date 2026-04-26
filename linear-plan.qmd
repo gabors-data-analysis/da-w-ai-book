@@ -4,76 +4,93 @@ title: "The Linear Plan"
 
 # The Linear Plan {.unnumbered}
 
-This page exists because the book is a *re-arrangement* of an existing course, and a careful reader will want to know what was moved, why, and where the original lives. It also serves as a working document while the book is in draft: it explains the editorial logic of the chapter order so it can be challenged.
+This page is the editorial working document for the book. It explains the *audience*, the *structure*, the *chapter shape*, and the *open follow-ups*. Readers can skip it; authors and contributors should not.
 
-## The arc in one paragraph
+## Audience and assumed background
 
-Start with what an LLM actually is and which one to use. Then learn to use chat models well — for documentation, joins, reports, graphs. Move to the terminal and to agentic CLIs (Claude Code), which let AI act on real files in real projects. Apply that workflow to text data — interview transcripts, sentiment. Then to research workflows — control variables, instrumental variables. Then to APIs and automation, which let you stop clicking and start scheduling. End with a capstone that exercises everything against one messy real-world question.
+The target reader is a **second- or third-year undergraduate** in economics, finance, business, analytics, or PPE — or a **first-year MA/MSc** in the same. They have:
 
-## How weekly course material maps to chapters
+- One solid course on data analysis, ideally [Békés–Kézdi (2021)](https://gabors-data-analysis.com/getting-started). The textbook is treated as a parallel companion, not a prerequisite the book re-derives. Where a chapter brushes a method (DiD, IV, fixed effects, joins, panel structure), it links back to the relevant Békés–Kézdi chapter rather than re-explaining.
+- A working knowledge of Python — enough to write a small script and read someone else's.
+- A chat-AI account they have used casually but not yet for analytical work.
 
-| Course source                        | Chapter(s)                                        |
-|--------------------------------------|---------------------------------------------------|
-| Week 0 — AI for coding prep          | Ch. 1 (Foundations)                               |
-| Week 1 — LLM review                  | Ch. 2 (Foundations)                               |
-| Week 2 — Documentation               | Ch. 5 (Working in chat)                           |
-| Week 3 — Reporting                   | Ch. 8–9 (Working in chat)                         |
-| Week 4 — Agentic AI with CLIs        | Ch. 14 (CLI workflows)                            |
-| Week 5 — Advanced CLI workflows      | Ch. 15 (CLI workflows)                            |
-| Week 6 — Data to report              | Ch. 16 (CLI workflows)                            |
-| Week 7 — Text as data                | Ch. 20 (Text as data)                             |
-| Week 8 — Sentiment analysis          | Ch. 21 (Text as data)                             |
-| Week 9 — AI research: controls       | Ch. 23 (AI in research)                           |
-| Week 10 — AI research: IV            | Ch. 24 (AI in research)                           |
-| Capstone (3 sessions)                | Ch. 31–34 (Capstone part)                         |
+We do not assume Git, GitHub, terminal fluency, an IDE, or API experience. Part 0 covers all of that.
 
-## How knowledge-base articles fold in
+## What this book is — and isn't
 
-The course-website's "Knowledge Base" sidebar holds reusable reference pages. In the book they stop being a separate sidebar and become **chapters in the place where you first need them**.
+This is a **standalone book**, not a companion website. Each chapter is meant to be read on its own, on the page, without clicking elsewhere. The companion course at [gabors-data-analysis.com/ai-course/](https://gabors-data-analysis.com/ai-course/) remains live for instructors who want the weekly-class form of the same material; the book does not depend on it.
 
-| Knowledge-base page                  | Folded into                                       |
-|--------------------------------------|---------------------------------------------------|
-| Which AI model                       | Ch. 3 — right after the LLM review                |
-| Glossary of LLM terms                | Ch. 4 — closes Part I                             |
-| Documentation fundamentals           | Ch. 6 — alongside the documentation chapter       |
-| Joining data tables                  | Ch. 7 — before reports require joined data        |
-| Creating graphs                      | Ch. 10 — closes the chat-workflow part            |
-| Terminal basics                      | Ch. 11 — opens the CLI part                       |
-| Installing AI CLI tools              | Ch. 12 — install before use                       |
-| VS Code + Copilot setup              | Ch. 13 — alternative IDE-based workflow           |
-| Designing larger analytics projects  | Ch. 17 — once CLIs are working                    |
-| Reproducible research                | Ch. 18 — closes the CLI part                      |
-| NLP basics                           | Ch. 19 — opens text-as-data                       |
-| PDF guide                            | Ch. 22 — closes text-as-data                      |
-| Get AI API keys                      | Ch. 25 — opens APIs part                          |
-| APIs intro                           | Ch. 26                                            |
-| LLM APIs in Python                   | Ch. 27                                            |
-| APIs under the hood                  | Ch. 28                                            |
-| Walkthrough: World Bank + FRED       | Ch. 29                                            |
-| Walkthrough: FBref                   | Ch. 30                                            |
-| Beyond — what to read next           | Reference                                         |
+Editorial consequences:
 
-## What stays in the website but not the book
+- **No pictures by default.** A diagram only earns its place when the prose cannot. Screenshots date in months and are avoided.
+- **Layout simplified.** The course pages used hero blocks, "week cards", and other web-native ornaments. The book strips these. One simple chapter shape.
+- **Self-contained chapters.** A reader who opens the book at Chapter 14 should be able to read it without first reading Chapter 13.
+- **External links sparingly.** When we link, we link to durable references (Békés–Kézdi sections, Anthropic / OpenAI documentation, foundational papers), not to course pages.
 
-- The **slideshows** are linked from the website but live elsewhere; the book mentions them in passing.
-- **Case-study pages** (with their data dictionaries and sample code) live in the website's `case-studies/` and are referenced from the book; the Reference part summarises each in one page.
-- The week-by-week **schedule and dates** belong to the live course, not the book.
+## The chapter shape
 
-## Editorial principles for the draft
+Every chapter follows the same skeleton, with two flavours (Learn or Practice) and three length budgets (1–2, 2–4, or 4–5 pages). The full specification lives in [chapter-template.qmd](chapter-template.qmd).
 
-1. **One chapter, one idea.** Where a course week stuffed two ideas into one page (e.g. text-analysis intro + sentiment), the book splits them into two chapters.
-2. **Reference pages stop being reference pages.** A reader on a linear path doesn't want side-doors; they want the next chapter to assume what the previous one taught.
-3. **Labs preserve original wording.** The narrative is rewritten for a single voice; the labs keep the original assignment text so a student can submit them with confidence.
-4. **The capstone is a part, not an appendix.** It is the payoff for the whole book. Three chapters, one per session, with a brief that lets a self-learner do it solo or a team do it together.
-5. **APIs come late.** Most students will not need APIs until the capstone. Chapter-25–30 sit between the research-methods part and the capstone deliberately.
+The non-negotiable parts of every chapter:
 
-## Editorial decisions for this edition
+1. **Opening hook** — two or three sentences, no throat-clearing.
+2. **What you will get from this chapter** — three to five concrete outcomes.
+3. **Body** — concrete examples first, generalisations second.
+4. **Where AI helps · Where AI bluffs** — specific to the topic, never generic.
+5. **Keep this with you, not the AI** — the decisions that stay with the human.
+6. **Try this** — required for standard and long chapters; optional for short.
+7. **AI and me** — the same three reflection questions every chapter.
 
-These were open questions in the first draft. They are now locked for the **Spring 2026** edition. Subsequent editions can revisit, but a single edition holds these constant.
+Voice: precise but plain, short sentences, no bluffing, engaging without being breathless. Examples drawn from health and food, sports (especially football), global politics, finance, international business.
 
-- **Code language: Python only.** Earlier course editions juggled Python and R, which made every chapter longer than it needed to be and every example shallower than it could be. The book is Python-only; principles transfer.
-- **CLI agent: Claude Code, with brief footnotes for alternatives.** The CLI chapters are written against Claude Code — installation, `CLAUDE.md`, skills, headless mode. Cursor / Codex / Aider get one-paragraph mentions where they differ usefully. The principles transfer.
-- **Format: web-first.** The book is built and read on the web. A print edition is the print editor's problem to derive from a frozen snapshot — we do not pre-emptively cripple the web version with print-friendly compromises (no width-limited graphs, hero sections stay, embeds stay).
-- **Versioning: yearly spring edition.** The book is updated once a year, in spring, dated and labelled — e.g. *Spring 2026, 26 April 2026*. The model snapshot lives in [versions.qmd](versions.qmd) and is the first place to update each year. Inter-edition errata go in the GitHub issue tracker.
-- **Econometrics review: brief, with a textbook redirect.** Parts V and VII brush against DiD, IV, and selection-on-observables. The book covers the *workflow* — how AI helps, where it bluffs — and assumes the reader knows the *method*, or is willing to follow the redirect to [Békés & Kézdi (2021)](https://gabors-data-analysis.com/getting-started) for it.
-- **Chapter length: short.** Many short single-idea chapters, not few long bundled ones. As content gets fleshed out, prefer splitting over merging.
+## The eight parts (plus front and back matter)
+
+| Part | Focus |
+|---|---|
+| Front matter | Preface, How to use this book, Edition + model snapshot |
+| **Part 0** | Set up your tools — git, GitHub, Python, AI account |
+| **Part I** | What an LLM is, and what it isn't |
+| **Part II** | Working with AI in chat — documenting, joining, reporting, graphing |
+| **Part III** | From chat to CLI — terminal, agentic AI, end-to-end pipelines |
+| **Part IV** | Text as data — NLP basics, reading text, sentiment with LLMs |
+| **Part V** | AI in empirical research — controls, instrumental variables |
+| **Part VI** | APIs and automation — keys, LLM APIs in Python, walkthroughs |
+| **Part VII** | Capstone — Manager Impact in Football |
+| **Part VIII** | Labs — work on your own |
+| **Part IX** | Working honestly — academic integrity, cost and budget |
+| Reference | Case studies, Where to go from here, this Linear Plan |
+| Appendix | Rights, acknowledgements, thanks |
+
+The current draft is a re-flow of the course material into this shape. Many chapters are inlined source content that needs to be rewritten to the chapter shape. Placeholders sit in slots where the book argues a chapter is needed but the source course did not provide one.
+
+## Migration status
+
+The book was first scaffolded with `{{< include >}}` shortcodes pointing at the course's source files. After the move to this standalone repository, those includes were inlined: every chapter file is now self-contained. From here, each chapter goes through one rewrite pass to match the chapter template.
+
+Open follow-up tasks, in rough priority order:
+
+1. **Per-chapter rewrite via the writing skill.** Apply [chapter-template.qmd](chapter-template.qmd) to every inlined chapter. Strip web-only artefacts (hero blocks, week-card divs, image references). Add the *Helps · Bluffs* and *Keep this with you* sections.
+2. **Internal-link audit.** Inlined content still references course-website paths (`/da-knowledge/...`, `../week08/index.qmd`). Rewrite to chapter anchors inside the book.
+3. **Strip remaining R snippets.** The book is Python-only; some inlined sources still show R alongside Python.
+4. **Drop the `images/` folder** when the per-chapter rewrites no longer reference it.
+5. **Fill the placeholders** in Parts 0, I, and IX with full chapters.
+6. **Image-free check.** A final pass to confirm no `![](...)` references survive.
+
+## Editorial decisions (locked for Spring 2026)
+
+- **Audience.** Late-undergrad / first-year postgrad in economics, business, finance, analytics, PPE.
+- **Companion textbook.** Békés–Kézdi (2021). The book points to it for methods rather than re-deriving them.
+- **Form.** Standalone book. No companion website dependency. Web-only delivery (HTML), but readable as a single document.
+- **Pictures.** No pictures by default. Diagrams only when they explain something prose cannot.
+- **Code language.** Python only.
+- **CLI agent.** Claude Code is the working tool; alternatives get one-paragraph mentions.
+- **Versioning.** Yearly spring edition, dated and labelled. Inter-edition errata in the GitHub issue tracker.
+- **Chapter length.** Variable. 1–2 pages for a single idea; 2–4 for a workflow; 4–5 sparingly for an end-to-end walkthrough. No artificial uniformity.
+- **Chapter structure.** One template, two flavours (Learn / Practice). Same skeleton; different weights.
+
+## How to read this page if you are an author
+
+This is the file that gets out of date the fastest as the book matures. Two rules:
+
+- When you change the structure, update this page in the same commit.
+- When you make an editorial decision and put it into a chapter, log it in the *Editorial decisions* section above.

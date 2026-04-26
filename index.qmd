@@ -4,59 +4,143 @@ title: "Preface"
 
 # Preface {.unnumbered}
 
-This is the book companion of the open-source course **Doing Data Analysis with AI**. The course is taught at CEU in Vienna; the book takes the same material and lays it out as a single, linear path you can read on your own — from "what is an LLM?" to "I just shipped a reproducible causal-inference report with an AI teammate."
+## Why this book exists
 
-It is aimed at **social science students** — economics, political science, sociology, history, public policy — who already have an introductory data-analysis or econometrics course under their belt and some Python, and who now want to figure out how to make AI a daily collaborator without losing their judgement.
+Two ideas are colliding.
 
-::: {.callout-note}
-## Spring 2026 edition · 26 April 2026
-This is the **Spring 2026** edition of the book, written against **Claude Opus 4.7**, **Claude Sonnet 4.6**, **Claude Haiku 4.5**, and **ChatGPT 5.5**. The book is updated once a year, in spring. See [Edition and Model Snapshot](versions.qmd) for the full list and the maintenance policy.
-:::
+The first: most readers of this book will spend a chunk of their working life doing data analysis. Not "data science" with a capital D. Plain analysis. Pulling a CSV apart, joining it to another, running a regression you can defend, drawing a chart you can explain, writing a paragraph that someone can act on. That is what economics, finance, business, public-policy, and analytics jobs ask you to do.
 
-## Zero to hero, in one path
+The second: the tool for the job has changed. AI assistants — chat tools, coding agents, APIs — have moved in three years from amusing toy to plausible teammate. They write code. They read codebooks. They translate. They draft. They critique. They sometimes catch errors. They sometimes invent them.
 
-The course-website version of this material is laid out as a 12-week class with a sidebar of weekly modules, knowledge-base articles, case studies, and assignments. That works for an instructor; it can be intimidating for a student reading alone.
+This book is for the moment in between. You know enough about data analysis to know what good looks like. You don't yet know how to make AI part of how you do it. Closing that gap is the whole purpose of this book.
 
-This book reorganizes the same content as a **single linear narrative**, broken into many short chapters. Knowledge-base articles are folded into the chapter where they are first needed — terminal basics appear right before we start using the command line, NLP basics come right before we read text, an API primer comes right before we hit our first API. Nothing is buried two clicks deep.
+## Who this book is for
 
-The journey is roughly:
+You are most likely:
 
-1. **Foundations** — what LLMs actually are, which one to use, how to talk about them.
-2. **Working with AI in chat** — documenting code and data, joining tables, drafting reports, making graphs.
-3. **From chat to CLI** — the terminal, agentic AI (Claude Code), reproducible pipelines, end-to-end projects.
-4. **Text as data** — NLP basics, reading interview transcripts, sentiment analysis with LLMs.
-5. **AI in empirical research** — using AI as a research companion for control variables and instrumental variables.
-6. **APIs and automation** — keys, requests, LLM APIs in Python, real walkthroughs (World Bank, FRED, FBref).
-7. **Capstone** — a three-part team project on manager changes in football: data, text-to-expectations, difference-in-differences.
+- A second- or third-year undergraduate in economics, finance, business, analytics, or PPE.
+- Or a first-year MA or MSc student in any of the above.
+- You have seen one solid course on data analysis. The book this volume sits next to is [*Data Analysis for Business, Economics, and Policy*](https://gabors-data-analysis.com/getting-started) by Gábor Békés and Gábor Kézdi (Cambridge University Press, 2021). Any rigorous treatment will do; that one is the cleanest fit. You know what a regression is. You know what a panel data set looks like. You can clean a messy CSV without help.
+- You have a working knowledge of **Python** — enough to write a small script, read someone else's, and know what a DataFrame is. Not enough to feel comfortable.
+- You have used a chat AI for *something* — homework help, a recipe, a summary — but you have not yet used one as part of an analytical workflow you would defend.
 
-The narrative ends, but the book continues with a **Labs** section: hands-on assignments that mirror the original weekly course. Labs preserve the content of the course as-is so a student can work through them on their own; the chapters teach the ideas, the labs make you sweat.
+If most of that fits, this book is for you. If you have never seen a regression, the book will still make sense, but you will be running uphill. Read Békés–Kézdi first or alongside.
 
-## Three questions, every chapter
+## What this book is, and isn't
 
-The course's spine is the same three questions, asked at the end of every session:
+It is a **book**, not a website. Each chapter is meant to be read on its own and to make sense without clicking elsewhere. We will sometimes link to a chapter of Békés–Kézdi for a method we don't want to re-derive, but the book stands on its own.
 
-1. How did AI **support** me in doing what I planned?
-2. How did AI **fail** me — half-truths, buggy code, imprecise arguments?
-3. How did AI **extend** me — letting me do things I couldn't, or giving me new ideas?
+It is **standalone**. You do not need a separate companion site. The labs at the end of the volume are inside the same book. Everything you need is here.
 
-The book keeps that habit. Every chapter ends with a short "AI and me" reflection that you fill in for yourself.
+It is **opinionated**. We use Python — not R, not Stata, not Julia. We use a small stack of AI tools — one chat model, one coding agent, one or two APIs. The principles transfer to other choices. The code does not.
 
-## Python only, by design
+It is **dated**. This is the **Spring 2026 edition**, written in April 2026. The frontier models named in these pages — Claude Opus 4.7, ChatGPT 5.5, and a few others — will be obsolete by the time you reread the book. The *workflow* will not. We refresh the book once a year, in spring, with a new model snapshot.
 
-All code in this book is **Python**. Earlier course editions juggled Python and R, which made every chapter longer than it needed to be and every example shallower than it could be. The principles transfer to R, Stata, or Julia; this edition does not.
+It is **not** an introduction to econometrics. It is not a textbook on causal inference, machine learning, or natural language processing. It explains how to *work with AI on those things*. It assumes you already know — or are simultaneously learning — what those things are.
 
-If you are an R-first reader, the [course website](https://gabors-data-analysis.com/ai-course/) keeps R-flavoured pages alive in some places, and the underlying ideas are the same.
+It is **not** a survey of every AI tool on the market. We do not list twenty and weigh them. We pick a small set, work with them for real, and trust you to extend the lessons to whatever you have.
 
-## What this book is not
+## What AI is good at — and where it bluffs
 
-It is **not** an introductory econometrics or data-analysis textbook. The book assumes you already know what a regression is, what a panel data set looks like, and roughly how to clean a CSV. Where a chapter brushes against an econometric idea — instrumental variables, difference-in-differences, fixed effects — it does so briefly, and points you to the textbook below for the full treatment.
+AI assistants are very good at a small number of important things. They are bad at a different small number of important things. Knowing the difference is the most useful skill in this book.
 
-> 📖 **Companion textbook.** [Békés & Kézdi, *Data Analysis for Business, Economics, and Policy* (Cambridge UP, 2021)](https://gabors-data-analysis.com/getting-started). Full slideshows, datasets, and code are open. Buy a copy if you can.
+**Where AI is genuinely strong.**
 
-It is also **not** a survey of every AI tool on the market. We focus on a small, opinionated stack: a frontier chat model (Claude or ChatGPT — pick one), a CLI agent (Claude Code), and a few APIs. The principles transfer.
+- *Well-defined chunks of code.* Loading a CSV, joining two tables, fitting a standard regression, drawing a basic chart. The library calls live in its training data. It writes the boilerplate faster than you can.
+- *Documentation and translation.* Explaining a function. Turning a four-hundred-page codebook into a one-page summary. Rewriting your bullet points into a paragraph. Translating between Python and R when you need to. Reading a regulation drafted in legalese and explaining the bit you care about.
+- *First drafts.* Of code, of memos, of research questions, of analysis plans. The first draft is rarely the right answer. The first draft is *something to react to*. AI is excellent at producing something to react to.
+- *Pattern work at scale.* Tagging five thousand customer reviews as positive or negative. Classifying news articles by topic. Extracting structured information from messy text. Tasks tedious for a human and routine for an LLM.
 
-## License and use
+**Where AI bluffs.**
 
-Open source under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Fork it, teach with it, submit pull requests. The repository lives at [github.com/gabors-data-analysis/da-w-ai](https://github.com/gabors-data-analysis/da-w-ai).
+- *Anything precise that wasn't in its training data.* A specific data set's variable names. A regulation that changed last quarter. A football match that happened on Tuesday. AI confidently invents a plausible-sounding answer. This is the famous "hallucination."
+- *Causal claims.* It will read your code, see a regression, and call it "the effect of X on Y" — even when you have not done the work to back that up. It does not know the difference between a correlation and a causal estimate unless you tell it.
+- *Judgement calls about your audience.* Which exhibits to keep. Which to drop. Which sentence opens the report. Which result to put in the title. AI gives you the average preference of the internet. Your reader is not the internet.
+- *Knowing when it is wrong.* This is the deep one. AI does not flag low confidence the way a human collaborator does. It bluffs in the same prose it tells you the truth in. The tone is identical. The content is not.
+
+You will spend this book learning to feel that line.
+
+## Two kinds of speed-up
+
+When AI works, it does two different things for you.
+
+**It makes you faster at things you already know how to do.** A regression specification you would have written in twenty minutes you now write in three. A figure you would have iterated on for an hour you now iterate on for ten minutes. A README you would have grumbled through you now have a draft of in two minutes and edit in fifteen. This is not a small thing. Multiplied across a project, it is the difference between shipping the analysis and shipping a worse one because you ran out of time.
+
+**It lets you do things you couldn't do.** A four-hundred-page codebook you would have skimmed and given up on you can now query intelligently. A corpus of a thousand interviews you would never have read you can now classify and summarise. An API you would have spent a weekend learning you can now use in twenty minutes. This is the bigger thing. AI does not only compress what you do; it expands what is in scope to do at all.
+
+Both are real. Both are valuable. Both are dangerous in their own way. The first lulls you into using AI on tasks where you cannot actually check the output. The second lets you confidently produce analysis you do not actually understand. The book trains you to enjoy both *and* notice when each is happening.
+
+## The human keeps the decisions
+
+This is the principle the book returns to most often. Some decisions you can hand to AI without losing anything. Most you should not.
+
+**Hand to AI cheerfully.** Code formatting. Default fonts in a chart. The order of arguments in a function call. The sentence-level rewriting of a paragraph you have already drafted. The boilerplate at the top of a script. The choice of variable names within a small block of code. These do not move the substance of your work.
+
+**Keep for yourself.** The research question. The unit of observation. Which controls go in the regression. What counts as the treatment. Where you cut the time period. The colour scheme of the headline chart. The headline number you put in the abstract. The voice of the report. The limitations paragraph. Every single causal claim. These *are* the substance of your work.
+
+The asymmetry is not arbitrary. AI has no agency in your project — no stake, no deadline, no audience, no career, no reputation. It will give you the average reasonable answer to whatever you asked. *You* are the one who knows the question well enough to want a *non-average* answer. That is your edge. Do not outsource it.
+
+A useful test: if you cannot explain *why* the AI's choice is right, you are not in a position to keep it. Either learn enough to explain it, or change it to something you can.
+
+## Build taste, build a habit of checking
+
+The single most important skill you will develop in this book is *taste* — the ability to look at AI's output and tell, fast, whether it is good or not.
+
+Taste is not free. It comes from doing the work yourself enough times to know what good looks like. There is no shortcut. The students in the course who get the most out of AI are the same students who could do the work without it. AI amplifies you; it does not replace you.
+
+Closely related: a habit of *checking*. Every chapter in this book ends with a small checking exercise. We mean it. AI will mostly do what you asked. Sometimes it will quietly do something else — drop the wrong rows, fit a different specification, use the wrong unit, format dates inconsistently across two halves of the same script. The bug is plausible-looking. That is what makes it dangerous.
+
+Concrete habits the book teaches:
+
+- Always print the row count before and after a join.
+- Always check that a sample restriction kept the rows you expected.
+- Always sanity-check a coefficient against an unconditional mean before you believe it.
+- Always read the first three and the last three rows of any file an AI just wrote for you.
+- Always read the first few lines of code an AI wrote. You do not need to understand every line. You need to have *looked*.
+
+These are the cheapest insurance you will ever buy. Ten seconds. They save hours.
+
+## Honesty about what the book can and cannot do
+
+A note on tone, because it matters for trust.
+
+Some of the chapters describe workflows that work brilliantly today and may work less well tomorrow. We will say so when that is true.
+
+Some of the prompts in the book have been tuned against a specific model. They will need to be re-tuned for the next model. We will say so when that is true.
+
+Some of the case studies use simulated data. We will say so when that is true.
+
+Some claims about what AI can do come from short demonstrations rather than rigorous benchmarking. The book does not pretend otherwise. When we don't know, we say so.
+
+This is not modesty for its own sake. AI assistants are very good at sounding confident. A book about working with them that adopts the same tone teaches you the wrong habit. We would rather be a little duller and a lot more trustworthy.
+
+## How to read this book
+
+The book has three layers that travel together.
+
+**Chapters are the narrative.** Read them in order the first time. Many are short — a page or two. Some are longer, four or five pages. The length matches the idea, not a fixed schedule. Do not expect every chapter to be the same shape.
+
+**Labs are the practice.** Each lab is a self-contained exercise: a brief, a data set or instructions for getting one, a prompt or two, a deliverable. They sit at the end of the book in Part VIII because the original course ran them as weekly assignments. Do them. The chapters teach the ideas; the labs make you sweat.
+
+**Three questions close every chapter.** The same three:
+
+> 1. How did AI **support** me in doing what I planned?
+> 2. How did AI **fail** me — half-truths, buggy code, imprecise arguments?
+> 3. How did AI **extend** me — letting me do things I couldn't, or giving me new ideas?
+
+Write the answers down. They are the most important artefact you will produce. Not because anyone will read them, but because writing them makes you notice what AI did. After fifty chapters of writing the answers, you will have built the taste this book is really about.
+
+## A promise
+
+If you finish this book — chapters and labs — you will be able to:
+
+- Set up a real analysis project with AI as a teammate, end to end, from a raw CSV to a written-up result.
+- Recognise, fast, where AI is helping you and where it is misleading you.
+- Decide, with confidence, what to delegate and what to keep.
+- Hold your own in a job where most analysts are five years behind on this.
+
+You will not have memorised every prompt in the book. The prompts will be obsolete by the time you graduate. You will, instead, have built the habit of using AI well: ambitious about scope, precise about the question, sceptical about the output, decisive about your role. That habit is the whole book. The rest is examples.
+
+Welcome.
 
 — Gábor Békés, Vienna · April 2026

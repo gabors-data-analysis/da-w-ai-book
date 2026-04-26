@@ -1,0 +1,30 @@
+---
+title: "Prompting basics"
+---
+
+# Prompting basics
+
+::: {.callout-warning}
+## Placeholder chapter
+Stub. To be drafted via the chapter-writing skill.
+:::
+
+## What this chapter will cover
+
+A short, opinionated chapter on talking to a chat AI. Most "prompting guides" you find online are recipes. This one is principles.
+
+- Be specific about the task, the constraint, and the audience.
+- Tell the model what *not* to do as well as what to do.
+- Give it the data — actually give it. A pasted CSV preview beats three paragraphs of description.
+- Iterate; don't redraft. AI is good at fixing one thing at a time.
+- When in doubt, ask the model what it would need to do better. The answers are useful.
+
+## Where this chapter fits
+
+Right after the LLM glossary and before the chapters where we start working in chat seriously (Part II).
+
+## TODO for the author
+
+- A worked before/after example: vague prompt, output, sharper prompt, better output.
+- One "anti-pattern" sidebar: roleplay prompts ("act as a senior data scientist…") — when they help and when they hurt.
+- A short note on the difference between *prompting* and *context engineering*. The book mostly cares about the second one.

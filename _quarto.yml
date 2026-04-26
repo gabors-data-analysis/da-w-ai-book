@@ -20,14 +20,23 @@ book:
     - index.qmd                              # Preface
     - how-to-use.qmd
     - versions.qmd                           # Edition + model snapshot
-    - linear-plan.qmd
 
-    - part: "Part I — Foundations"
+    - part: "Part 0 — Set up your tools"
       chapters:
-        - chapters/01-ai-for-coding.qmd      # source: week00
-        - chapters/02-llm-review.qmd         # source: week01
+        - chapters/00a-prep.qmd              # PLACEHOLDER: what you need before you start
+        - chapters/00b-git.qmd               # PLACEHOLDER: git for analysts
+        - chapters/00c-github.qmd            # PLACEHOLDER: GitHub for analysts
+        - chapters/00d-python.qmd            # PLACEHOLDER: your Python environment
+        - chapters/00e-ai-account.qmd        # PLACEHOLDER: chat AI account, paid vs free
+
+    - part: "Part I — What an LLM is, and what it isn't"
+      chapters:
+        - chapters/01-ai-for-coding.qmd      # source: week00 (to be rewritten via SKILL)
+        - chapters/02-llm-review.qmd         # source: week01 (to be rewritten via SKILL)
         - chapters/03-which-ai.qmd           # source: da-knowledge/which-ai
         - chapters/04-glossary.qmd           # source: da-knowledge/technical-terms-page
+        - chapters/04a-prompting-basics.qmd  # PLACEHOLDER
+        - chapters/04b-where-ai-fails.qmd    # PLACEHOLDER: hallucinations + how to catch them
 
     - part: "Part II — Working with AI in Chat"
       chapters:
@@ -90,10 +99,16 @@ book:
         - labs/lab-08.qmd
         - labs/lab-10.qmd
 
+    - part: "Part IX — Working honestly"
+      chapters:
+        - chapters/89-academic-integrity.qmd # PLACEHOLDER: AI in your method section, citing AI, what to disclose
+        - chapters/89a-cost-and-budget.qmd   # PLACEHOLDER: keeping API spend under a student budget
+
     - part: "Reference"
       chapters:
         - chapters/90-case-studies.qmd
         - chapters/91-beyond.qmd             # source: da-knowledge/beyond
+        - linear-plan.qmd                    # editorial rationale + week→chapter map
 
   appendices:
     - chapters/A1-rights-thanks.qmd
